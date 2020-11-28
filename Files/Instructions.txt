@@ -1,0 +1,17 @@
+&><><><><><><><><><><><><><><><><><><><><&
+&  ------------                          &
+&  How to Play:                          &
+&  ------------                          &
+&                                        &
+&  - When prompted, type the number that &
+&    corresponds to the option you want  &
+&    to choose.                          &
+&  - Sometimes, you may be asked to      &
+&    type a word instead.                &
+&  - Press the "Enter" key to finalize   &
+&    your choice.                        &
+&  - Remember, your actions have         &
+&    consequences! Your deeds might come & 
+&    back to help you... or hurt you.    &
+&                                        &
+&><><><><><><><><><><><><><><><><><><><><&
