@@ -7,76 +7,42 @@
 
 #include "TextAdventure.h"
 
-Scene::Scene() {
+Scene::Scene(string story[5], string options[5], int numStory, int numOptions) {
 	for (int i = 0; i < 5; i++) {
-		storyLines[i] = " ";
-		baseOptions[i] = " ";
-		specialOptions[i] = " ";
+		this->story[i] = story[i];
+		this->options[i] = options[i];
 	}
 
-	numStoryLines = 0;
-	numBaseOptions = 0;
+	this->numStory = numStory;
+	this->numOptions = numOptions;
 }
 
-int Scene::play(int specialReqs[5], int characterHistory[5]) {
+int Scene::play() {
 
 	system("CLS");
 
 	bool isValid = false;
 	int choice;
-	int validSpecials[5];
 
 // PRINT STORY AND OPTIONS
 
-	for (int i = 0; i < numStoryLines; i++) {
-		cout << storyLines[i] << endl;
+	for (int i = 0; i < numStory; i++) {
+		cout << story[i] << endl;
 	}
 
 	cout << endl;
 
-	for (int i = 0; i < numBaseOptions; i++) {
-		cout << i + 1 << " - " << baseOptions[i] << endl;
-	}
-
-	for (int i = 0; i < 5; i++) {
-		if (specialReqs[i] != 0) {
-			if (i == 0 || i == 1 || i == 4) {
-				if (characterHistory[i] == specialReqs[i]) {
-					cout << i + 5 << " - " << specialOptions[i] << endl;
-					validSpecials[i] = i + 5;
-				}
-			}
-			else if (i == 2 || i == 3) {
-				if (characterHistory[i] >= specialReqs[i]) {
-					cout << i + 5 << " - " << specialOptions[i] << endl;
-					validSpecials[i] = i + 5;
-				}
-			}	
-		}
+	for (int i = 0; i < numOptions; i++) {
+		cout << i + 1 << " - " << options[i] << endl;
 	}
 
 // GET ANSWER, CHECK VALIDITY
 	while (!isValid) {
 		cin >> choice;
 	
-		if (choice != 0 && choice <= numBaseOptions) {
+		if (choice != 0 && choice <= numOptions) {
 			isValid = true;
 		}
-		else if (choice != 0 && choice == validSpecials[0]) {
-			isValid = true;
-		}
-		else if (choice != 0 && choice == validSpecials[1]) {
-			isValid = true;
-		}
-		else if (choice != 0 && choice == validSpecials[2]) {
-			isValid = true;
-		}
-		else if (choice != 0 && choice == validSpecials[3]) {
-			isValid = true;
-		}
-		else if (choice != 0 && choice == validSpecials[4]) {
-			isValid = true;
-		}	
 		else {
 			cout << "Invalid choice!" << endl;
 		}
