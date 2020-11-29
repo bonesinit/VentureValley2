@@ -1,0 +1,22 @@
+Test Quest!
+
+0
+Test story
+Test story 2
+Test story 3
+!
+Test option
+Test option 2
+Test option 3
+!
+?
+1
+Scene 2 test story 
+Scene 2 test story 2
+!
+Scene 2 test option
+?
+
+
+
+

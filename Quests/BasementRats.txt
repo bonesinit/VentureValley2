@@ -1,0 +1,80 @@
+// Scene 0: Start. 
+0
+There's a bunch of angry rats in your basement!
+What will you do?
+!
+Run!
+Hide!
+Fight!
+?
+
+// Scene 1: Ran in scene 0.
+1
+You run away from the rats, but they locked your way out!
+!
+Bust the door down!
+I'm gonna cry!
+Guess I'll die?
+?
+
+// Scene 2: Hid in scene 0.
+2
+You hide from the rats behind a big clown statue. 
+You're safe here.
+!
+Oh thank god.
+Wait, I don't have a clown statue?
+?
+
+// Scene 3: Fought in scene 0.
+3
+What do you think you're gonna do to a rat?
+Punch it?
+Yeah no, they're gonna eat you. There's like 1000 rats.
+!
+Guess I'll die :(
+?
+
+// Scene 4: Busted the door down in scene 1.
+4
+The door doesn't budge.
+"Too late Mr. Krabs! We've already glued all the doors shut!"
+"Haha nice spongebob reference" you think as they eat you.
+!
+Guess I'm dead tho
+?
+
+// Scene 5: Cried in scene 1.
+5
+"Oh gosh I'm so sorry!" say the rats in unison.
+"We'll leave you alone sorry again!"
+The rats leave. You win!
+!
+o-o-Oh t-thank god :')
+?
+
+// Scene 6: Didn't question clown statue in scene 2
+6
+"Aww no one ever questions my existence :(" says the clown.
+"I'm just gonna go :("
+The clown leaves, leaving you out in the open!
+!
+Noooo!
+?
+
+// Scene 7: Questioned clown statue in scene 2
+7
+"How very perceptive of you!" the clown says.
+"Here I'll kill those rats for you."
+You win!
+!
+Yaass
+?
+
+// Scene 8: Die in scenes 1, 3, 4, or 6
+8
+You died!
+Sorry :(
+!
+Aww :(
+?

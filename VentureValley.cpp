@@ -6,33 +6,25 @@ int main()
 	Menu* menu = new Menu();
 
 // SETUP GAME CONTROL
-	bool quit		=	false;	
-	bool inGame		=	false;	// If false we are in a menu.
-	bool inQuest	=	false;	// If false we are in a village.
+	bool quit			=	false;	
+	bool inGame			=	false;	// If false we are in a menu.
+	bool inQuest		=	false;	// If false we are in a village.
 
-	int	menuType	=	1;
-	int	menuChoice	=	0;
+	int	menuType		=	1;
+	int	menuChoice		=	0;
 
-	int activeQuest =	0;
-	int activeVillage = 0;
+	int activeQuest		=	0;
+	int activeVillage	=	0;
 
 // SETUP QUESTS
 	// Quest 1: Basement Rats (activeQuest == 1)
-	// Scene 0
-	string bRats_0_story[5] = { "There's rats in your basement!", "What will you do?", " ", " ", " " };
-	string bRats_0_options[5] = { "Run!", "Hide!", " ", " ", " " };
-	Scene* bRats_0 = new Scene(bRats_0_story, bRats_0_options, 2, 2);
-		// Run goes to scene 1, hide goes to scene 2.
-	// Scene 1
-	string bRats_1_story[5] = { "You ran!", "This worked!", " ", " ", " " };
-	string bRats_1_options[5] = { "Yay!", " ", " ", " ", " " };
-	Scene* bRats_1 = new Scene(bRats_1_story, bRats_1_options, 2, 1);
-	// Scene 2
-	string bRats_2_story[5] = { "You hid!", "This worked!", " ", " ", " " };
-	string bRats_2_options[5] = { "Yay!", " ", " ", " ", " " };
-	Scene* bRats_2 = new Scene(bRats_2_story, bRats_2_options, 2, 1);
+	Scene BasementRats[9];
+	string BasementRatsFile = "Quests/BasementRats.txt";
+	for (int i = 0; i < 9; i++) {
+		int sceneNum = i;
+		BasementRats[i] = Scene(BasementRatsFile, sceneNum);
+	}
 
-	
 // SAVED VARIABLES
 
 // GAMEPLAY LOOP
@@ -52,7 +44,7 @@ int main()
 
 			switch (menuChoice) {
 			// Return to main menu.
-			case 0:								
+			case 0:		
 				menuType = 1;
 				break;
 
@@ -90,16 +82,80 @@ int main()
 
 			while (inQuest) {
 				
-				if (activeQuest == 1) {
-					int bRats_0_Ans = bRats_0->play();
+				int currScene = 0;
+				int ans = 0;
 
-					if (bRats_0_Ans == 1) { // Run!
-						cout << "Ran away!" << endl;
-						int bRats_1_Ans = bRats_1->play();
+				while (activeQuest == 1) {
+					ans = BasementRats[currScene].play();
+
+					// Scene 0: Rats in your basement!
+					if (currScene== 0) {
+						switch (ans) {
+						case 1:
+							currScene = 1;
+							break;
+						case 2:
+							currScene = 2;
+							break;
+						case 3:
+							currScene = 3;
+							break;
+						}
 					}
-					else if (bRats_0_Ans == 2) { // Hide!
-						cout << "Hidden!" << endl;
-						int bRats_2_Ans = bRats_2->play();
+					// Scene 1: Run in scene 0
+					else if (currScene == 1) {
+						switch (ans) {
+						case 1:
+							currScene = 4;
+							break;
+						case 2:
+							currScene = 5;
+							break;
+						case 3:
+							currScene = 8;
+							break;
+						}
+					}
+					// Scene 2: Hid in scene 0
+					else if (currScene == 2) {
+						switch (ans) {
+						case 1:
+							currScene = 6;
+							break;
+						case 2:
+							currScene = 7;
+							break;
+						}
+					}
+					// Scene 3: Fight in scene 0
+					else if (currScene == 3) {
+						currScene = 8;
+					}
+					// Scene 4: Buest down door in scene 1
+					else if (currScene == 4) {
+						currScene = 8;
+					}
+					// Scene 5: Cried in scene 1
+					else if (currScene == 5) {
+						activeQuest = 0;
+						inQuest = false;
+						inGame = false;
+					}
+					// Scene 6: Didn't question clown in 2
+					else if (currScene == 6) {
+						currScene = 8;
+					}
+					// Scene 7: Questioned clown in 2
+					else if (currScene == 7) {
+						activeQuest = 0;
+						inQuest = false;
+						inGame = false;
+					}
+					// Scene 8: Die in 1, 3, 4 or 6
+					else if (currScene == 8) {
+						activeQuest = 0;
+						inQuest = false;
+						inGame = false;
 					}
 				}	
 				
