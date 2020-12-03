@@ -43,6 +43,7 @@ public:
 
 	Item inventory[5]; //placeholder number. possibility of adding a backpack class too in the future.
 
+	int getItemID(int index);
 	void addItem(int index, Item toAdd);
 	void destroyItem(int index);
 	void moveItem(int indexFrom, int indexTo);
@@ -55,6 +56,7 @@ public:
 
 	Item buyables[5]; 
 
+	int getBuyableID(int index);
 	void addItem(int index, Item toAdd);
 	void destroyItem(int index);
 	void moveItem(int indexFrom, int indexTo);

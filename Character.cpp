@@ -7,6 +7,11 @@
 
 
 //	Player
+int Player::getItemID(int index)
+{
+	return inventory[index].id;
+}
+
 void Player::addItem(int index, Item toAdd)
 {
 	inventory[index] = toAdd;
@@ -39,6 +44,11 @@ void Player::moveItem(int indexFrom, int indexTo)
 
 
 //	Vendor
+int Vendor::getBuyableID(int index)
+{
+	return buyables[index].id;
+}
+
 void Vendor::addItem(int index, Item toAdd)
 {
 	buyables[index] = toAdd;
