@@ -6,21 +6,28 @@
 #pragma once
 using namespace std;
 #include <string>
+#include <iostream>
 
 class Item {
-	public:
-		int id;
-		string name;
-		string descItem;
-		string uniqueToClass[5];
-		string notUsedBy[5];
+public:
+	int id;
+	string name;
+	string descItem;
+	bool uniqueToClass[5];
+	bool notUsedBy[5];
+	int itemStats;
+	bool hasItem;
 
-		int cost;
+	int cost;
 
-		void printInfo();
+	void printInfo(int itemIndex);
 
 };
 
 class InteractiveItem : public Item {
+	//for items that do things such as add stat bonuses, or affect the game in other ways than providing additional dialogue options
+	//must add in cpp file any additonal content
+	int itemBonus;
+	bool uniqueItem;
 
 };
