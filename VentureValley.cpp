@@ -82,11 +82,19 @@ int main()
 
 			while (inQuest) {
 				
+				// TEMP
+				int tempCharHist[5];
+				tempCharHist[0] = 7;
+				tempCharHist[1] = 1;
+				tempCharHist[2] = 0;
+				tempCharHist[3] = 0;
+				tempCharHist[4] = 0;
+
 				int currScene = 0;
 				int ans = 0;
 
 				while (activeQuest == 1) {
-					ans = BasementRats[currScene].play();
+					ans = BasementRats[currScene].play(tempCharHist);
 
 					// Scene 0: Rats in your basement!
 					if (currScene== 0) {
@@ -99,6 +107,14 @@ int main()
 							break;
 						case 3:
 							currScene = 3;
+							break;
+						case 10: 
+							cout << "Secret worked!" << endl;
+							system("PAUSE");
+							break;
+						case 11:
+							cout << "Secret worked!" << endl;
+							system("PAUSE");
 							break;
 						}
 					}

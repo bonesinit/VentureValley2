@@ -6,6 +6,13 @@ What will you do?
 Run!
 Hide!
 Fight!
+!
+@
+_5
+[Strength] Punch
+#
+_1
+[Rouge] Hide
 ?
 
 // Scene 1: Ran in scene 0.
