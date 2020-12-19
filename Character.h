@@ -13,7 +13,7 @@ class Character {
 public:
 	int id;
 	string name;
-
+	int gold;
 };
 
 
@@ -48,6 +48,8 @@ public:
 	void destroyItem(int index);
 	void moveItem(int indexFrom, int indexTo);
 	Item dropItem(int index); //removes item from inventory, but the function returns it. could be useful when transferring items to another object.
+
+	Player(); //no cosntructors needed since only one player is ever instantiated
 };
 
 class Vendor : public Character {
@@ -62,5 +64,15 @@ public:
 	void moveItem(int indexFrom, int indexTo);
 	int getBuyableCost(int index);
 
-	void printDialogue();
+	void printDialogue(); //prints a random dialogue option from a given list
+
+	Vendor();
+	Vendor(int id);
+	Vendor(int id, string name);
+	Vendor(int id, string name, Item items[]);
+	Vendor(int id, string name, Item item1);
+	Vendor(int id, string name, Item item1, Item item2);
+	Vendor(int id, string name, Item item1, Item item2, Item item3);
+	Vendor(int id, string name, Item item1, Item item2, Item item3, Item item4);
+	Vendor(int id, string name, Item item1, Item item2, Item item3, Item item4, Item item5);
 };

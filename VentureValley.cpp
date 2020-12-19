@@ -1,3 +1,4 @@
+#pragma once
 #include "TextAdventure.h"
 
 int main()
@@ -26,6 +27,20 @@ int main()
 	}
 
 // SAVED VARIABLES
+	Player player;
+	player.id = 0;
+
+// ITEM DATABASE
+	Item itemDatabase[50]; //put all premade items here.
+
+	itemDatabase[0] = Item(); //use the desired constructor
+	//string testItemDesc = "blah blah w*iner b*lls sw*ar w*rds"
+	//itemDatabase[0].setDescription(testItemDesc)
+
+// VENDOR DATABASE
+	Vendor vendorDatabase[30]; //put all premade vendors here.
+
+	vendorDatabase[0] = Vendor(); //use the desired constructor
 
 // GAMEPLAY LOOP
 	while (!quit) {
@@ -50,13 +65,17 @@ int main()
 
 			// Start a new game.
 			case 1:
-				//menuType = 4;
+				menuType = 4;
 
-				// TEMP
+				// TEMP FOR TESTING QUESTS
+				/*
 				inGame = true;
 				inQuest = true;
 				activeQuest = 1;
+				*/
+
 				break;
+				
 
 			// Load a saved game.
 			case 2:
@@ -72,7 +91,25 @@ int main()
 				inGame = true;
 				quit = true;
 				break;
+
+			// Start Game (triggered after char creation)
+			case 10:
+				inGame = true;
+				//activeVillage = 1;
+
+				inQuest = true; //change this to false when villages are implemented
+				activeQuest = 1;
+
+				player.name = menu->playerName;
+				player.archetype = menu->playerArchetype;
+				player.stats[0] = menu->playerStrength;
+				player.stats[1] = menu->playerAgility;
+				player.stats[2] = menu->playerIntelligence;
+				player.stats[3] = menu->playerCharisma;
+				player.stats[4] = menu->playerLuck;
+				break;
 			}
+
 		}
 
 		while (inGame) {

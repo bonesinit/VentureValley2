@@ -9,4 +9,7 @@ using namespace std;
 
 #include "Menu.h"
 #include "Scene.h"
+#include "Character.h"
+#include "Item.h"
+
 

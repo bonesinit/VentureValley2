@@ -18,3 +18,19 @@ void Item::printInfo(int itemIndex) {
 
 };
 
+void Item::setDescription(string description) {
+	descItem = description;
+}
+
+Item::Item() {
+
+}
+
+Item::Item(int id) {
+	id = id;
+}
+
+Item::Item(int id, string name) {
+	id = id;
+	name = name;
+}

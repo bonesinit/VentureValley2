@@ -16,12 +16,29 @@
 #pragma once
 
 #include "TextAdventure.h"
+#include <algorithm>
 
 using namespace std;
 
 class Menu
 {
 public:
+	//character creation
+	string playerName;
+	int playerArchetype = 0;
+	int playerStrength = 1;
+	int playerAgility = 1;
+	int playerIntelligence = 1;
+	int playerCharisma = 1;
+	int playerLuck = 1;
+	const int maxStatPoints = 15; //not counting the minimum of 1 for all the stats, meaning an effect 10 to spend
+	int statPointsRemaining;
+	bool doneAllocating = false;
+	int statChoice;
+	
+	//general menus
 	int printMenu(int type);
+
+	int cinIntMinMax(int toCin, int min, int max); //min and max are inclusive. reusable function to cin and set a max or minimum for an int.
 };
 
