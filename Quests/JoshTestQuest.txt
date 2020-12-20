@@ -1,0 +1,39 @@
+// Scene 0: Start. 
+0
+There is no sun in this dastardly, monochromatic hamlet. For all these hapless chimps know, the smog hugs up to every edge of the world.
+Two guards, awkwardly clad in chainmail stand guard outside the dilapidated city gate. They look really sad- wow, everyone does. This is actually really sad.
+Fortunately, you happen to speak chimp and can understand them when you approach, even through their thick Brooklyner accents.
+"De city is currently on lockdown. Yuh with me? Nobody is allowed in or out. Ya' dig? Come back in a week! Okay?"
+!
+Try to bribe them.
+Wait a few days in a nearby hamlet.
+!
+@
+_6
+[Charisma] "I am a courier sent by the King, and come with an urgent message for the lord of this land!"
+@
+_8
+[Charisma] "I am the doodoo inspector- the Baron sent me to inspect the mess you lot made in town square!"
+@
+_7
+[Dexterity] Rush past them and through the gate!
+?
+
+// Scene 1: Bribed in scene 0.
+1
+"Maybe this will change your minds." you say, as you reveal a small pouch of coin.
+There's a brief pause: the two look at eachother, then back at you.
+"Do yuh have any bananas, or what?"
+!
+Option 1
+Option 2
+?
+
+// Scene 2: Waited a few days in scene 0.
+2
+You spend a few nights at a tavern in a surprisingly lively farmtown just a few hours away.
+The rowdy, energetic chimps here drink and sing shanties which keep you up at night.
+!
+Ignore it.
+Make them shut the heck up!
+?

@@ -18,10 +18,6 @@ void Item::printInfo(int itemIndex) {
 
 };
 
-void Item::setDescription(string description) {
-	descItem = description;
-}
-
 Item::Item() {
 
 }
@@ -33,4 +29,10 @@ Item::Item(int id) {
 Item::Item(int id, string name) {
 	id = id;
 	name = name;
+}
+
+Item::Item(int id, string name, string description) {
+	id = id;
+	name = name;
+	descItem = description;
 }

@@ -21,11 +21,11 @@ public:
 	int cost;
 
 	void printInfo(int itemIndex);
-	void setDescription(string description); //description not included in constructors cuz itd be too long
 
 	Item();
 	Item(int id);
 	Item(int id, string name);
+	Item(int id, string name, string description);
 
 };
 

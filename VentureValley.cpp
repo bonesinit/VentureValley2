@@ -26,21 +26,29 @@ int main()
 		BasementRats[i] = Scene(BasementRatsFile, sceneNum);
 	}
 
+	// Test Quest 2: Dellhollow Intro (activeQuest == 2). feel free to bump this quest back a bunch if you want yours to be consecutive.
+	Scene DellhollowIntro[2];
+	string DellhollowIntroFile = "Quests/JoshTestQuest.txt";
+	for (int i = 0; i < 2; i++) {
+		int sceneNum = i;
+		DellhollowIntro[i] = Scene(DellhollowIntroFile, sceneNum);
+	}
+
 // SAVED VARIABLES
 	Player player;
 	player.id = 0;
 
 // ITEM DATABASE
-	Item itemDatabase[50]; //put all premade items here.
-
-	itemDatabase[0] = Item(); //use the desired constructor
-	//string testItemDesc = "blah blah w*iner b*lls sw*ar w*rds"
-	//itemDatabase[0].setDescription(testItemDesc)
+	Item itemDatabase[30]; //put all premade items here. see Item.h for constructor documentation.
+	
+	itemDatabase[20] = Item(20, "Banana", "A long yellow thing. The mankeys love it!");
+	itemDatabase[21] = Item(21, "Suspicious Banana", "A long yellow thing. The mankeys love it!");
 
 // VENDOR DATABASE
-	Vendor vendorDatabase[30]; //put all premade vendors here.
+	Vendor vendorDatabase[30]; //put all premade vendors here. see Character.h for constructor documentation.
 
-	vendorDatabase[0] = Vendor(); //use the desired constructor
+	vendorDatabase[20] = Vendor(20, "Phil", itemDatabase[20]); //Phil will be a banana vendor in Dellhollow.
+	vendorDatabase[21] = Vendor(21, "Morrissey", itemDatabase[21]); //Morrissey will be black market dealer in Dellhollow available to rogues.
 
 // GAMEPLAY LOOP
 	while (!quit) {
@@ -211,6 +219,56 @@ int main()
 						inGame = false;
 					}
 				}	
+
+				while (activeQuest == 2) {
+					ans = DellhollowIntro[currScene].play(tempCharHist);
+
+					// Scene 0: intro
+					if (currScene == 0) {
+						switch (ans) {
+						case 1:
+							currScene = 1;
+							break;
+						case 2:
+							currScene = 2;
+							break;
+						case 3:
+							currScene = 3;
+							break;
+						case 10:
+							currScene = 4;
+							break;
+						case 11:
+							currScene = 5;
+							break;
+						}
+					}
+					// Scene 1: Bribed in scene 0.
+					else if (currScene == 1) {
+						switch (ans) {
+						case 1:
+							currScene = 4;
+							break;
+						case 2:
+							currScene = 5;
+							break;
+						case 3:
+							currScene = 8;
+							break;
+						}
+					}
+					// Scene 2: Waited a few days in scene 0.
+					else if (currScene == 2) {
+						switch (ans) {
+						case 1:
+							currScene = 6;
+							break;
+						case 2:
+							currScene = 7;
+							break;
+						}
+					}
+				}
 				
 			}
 		}
