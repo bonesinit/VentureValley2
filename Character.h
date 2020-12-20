@@ -49,6 +49,9 @@ public:
 	void moveItem(int indexFrom, int indexTo);
 	Item dropItem(int index); //removes item from inventory, but the function returns it. could be useful when transferring items to another object.
 
+	bool skillCheckChance(int statIndex, int numToBeat); //true if chosen stat + random num between 1 and luck stat beats numToBeat
+	bool skillCheck(int statIndex, int numToBeat); //tests stat against numtoBeat
+
 	Player(); //no cosntructors needed since only one player is ever instantiated
 };
 

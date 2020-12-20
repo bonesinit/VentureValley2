@@ -42,6 +42,26 @@ void Player::moveItem(int indexFrom, int indexTo)
 	inventory[indexFrom] = inventory[indexTo];
 }
 
+bool Player::skillCheckChance(int statIndex, int numToBeat) {
+	if (statIndex == 4) {
+		if (stats[statIndex] >= numToBeat) {
+			return true;
+		}
+	}
+	else if (stats[statIndex] + rand() % (stats[4] + 1) >= numToBeat)
+	{
+		return true;
+	}
+	return false;
+}
+
+bool Player::skillCheck(int statIndex, int numToBeat) {
+	if (stats[statIndex] >= numToBeat) {
+		return true;
+	}
+	return false;
+}
+
 Player::Player() {
 	
 }
