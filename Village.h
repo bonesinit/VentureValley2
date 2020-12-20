@@ -13,14 +13,15 @@ public:
 	string villageName;
 	string descType;
 
+
 	/*  The first village, Ptelios, created by Anna: Town with an ancient temple. The villagers worship the sun god Helios. They are known for their ancient hero, Pete.
 		The second village, Totenburg, created by Brandon: A town of skeletons trying to elect a new mayor.
 		The third village, Dellhollow, created by Joshua: An impoverished and crime - stricken coastal village that’s been placed under a horrible curse where
 															everyone has been turned into monkeys.
 	*/
 
-	int buildings[5];
-
+	string buildings[5];
+	string descBuild[5];
 	/* Example:
 		1 - Blacksmith
 		2 - Town Hall
