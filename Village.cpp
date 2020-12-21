@@ -25,8 +25,10 @@ void Village::printBuildings(int indexVill, int indexBuild) {
 			cout << descBuild[x] << endl;
 		}
 	}
-
+	
+	//only allow valid choices
 	do {
+		cout << "Pick a building above." << endl;
 		cin >> indexBuild;
 	} while(indexBuild > 5 && indexBuild < 0)
 

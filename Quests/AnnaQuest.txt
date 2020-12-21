@@ -1,0 +1,14 @@
+// Scene 0: Start.
+0
+Your horse's hooves pound the weathered stone path as you approach a new town.
+You slow your horse to a walk as you enter the town, passing a large statue of some mighty hero, arm held high with a sword.
+A large name is on the front of the statue, 'Pete'.
+Once you enter town, you spot a few buildings.
+Where would you like to go?
+!
+Blacksmith
+Town Hall
+General Store
+Temple
+Inn
+!
