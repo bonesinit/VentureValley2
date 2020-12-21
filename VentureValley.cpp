@@ -1,6 +1,9 @@
 #pragma once
 #include "TextAdventure.h"
 
+// This is just for in village stuff.
+int getInput(int numOptions, string options[5]);
+
 int main()
 {
 // SETUP MENU
@@ -16,6 +19,30 @@ int main()
 
 	int activeQuest		=	0;
 	int activeVillage	=	0;
+	int activeBuilding	=	0;
+
+// SETUP VILLAGES
+	// Village 2: Totenburg
+	Village totenburg;
+	totenburg.villageName = "Totenburg";
+	totenburg.descType = "A big ol' village full of skeletons just trying to get by.";
+	totenburg.buildings[0] = "Town Hall";
+	totenburg.buildings[1] = "Clack Clack Tavern";
+	totenburg.buildings[2] = "Henry's Variety of Goods";
+	totenburg.descBuild[0] = "The center of the village's government. Maybe you can get your horse back from there.";
+	totenburg.descBuild[1] = "A rough and tumble tavern. Might find a quest there, I dunno.";
+	totenburg.descBuild[2] = "Oh boy, I'm sure this place sells a lot of different goods!";
+	bool visitedTotenburg = 0;
+
+// SETUP BUILDINGS
+	// Village 2: Totenburg
+	// TODO LATER
+	Building townHall;
+	Building clackClack;
+	Building henrysVariety;
+	bool visitedTownHall = 0;
+	bool visitedClackClack = 0;
+	bool visitedHenrysVariety = 0;
 
 // SETUP QUESTS
 	// Quest 1: Basement Rats (activeQuest == 1)
@@ -37,6 +64,10 @@ int main()
 // SAVED VARIABLES
 	Player player;
 	player.id = 0;
+
+	int mayoralMishapsOutcome = 0;
+	int sharkHunterOutcome = 0;
+	int milkManOutcome = 0;
 
 // ITEM DATABASE
 	Item itemDatabase[30]; //put all premade items here. see Item.h for constructor documentation.
@@ -74,16 +105,7 @@ int main()
 			// Start a new game.
 			case 1:
 				menuType = 4;
-
-				// TEMP FOR TESTING QUESTS
-				/*
-				inGame = true;
-				inQuest = true;
-				activeQuest = 1;
-				*/
-
 				break;
-				
 
 			// Load a saved game.
 			case 2:
@@ -103,10 +125,11 @@ int main()
 			// Start Game (triggered after char creation)
 			case 10:
 				inGame = true;
-				//activeVillage = 1;
+				activeVillage = 2;
+				activeBuilding = 0;
 
-				inQuest = true; //change this to false when villages are implemented
-				activeQuest = 1;
+				inQuest = false; //change this to false when villages are implemented
+				activeQuest = 0;
 
 				player.name = menu->playerName;
 				player.archetype = menu->playerArchetype;
@@ -122,7 +145,163 @@ int main()
 
 		while (inGame) {
 			while (!inQuest) {
-			
+				system("CLS");
+
+				// Village 2: Totenburg
+				while (activeVillage == 2) {
+					system("CLS");
+
+					// In the main village!
+					if (activeBuilding == 0) {
+						// First visit gives you special story!
+						if (visitedTotenburg == 0) {
+
+							cout << "As you near Totenburg on your horse you hear what sounds like a hundred rhythmless xylophones in the distance." << endl;
+							cout << "You've heard the rumors about the coastal village, but it just seemed so ridiculous at the time." << endl;
+							cout << "But nope, when you reach town your two eyes confirm that Totenburg is indeed a town entirely populated by skeletons." << endl;
+							cout << endl;
+							cout << "Despite the fact everyone is dead, the town seems pretty lively." << endl;
+							cout << "Skeletons are going about their daily errands but your \"flesh suit\" is turning some heads." << endl;
+							cout << endl;
+							cout << "A guard approaches you. His jaw flaps comically as he talks." << endl;
+							cout << "The guard tells you he'll have to confiscate your horse." << endl;
+							cout << "You start to protest but he pulls the horse out from under you and runs off, holding it over his head with ease." << endl;
+							cout << "He yells that if you want it back you'll have to go to town hall, and he disappears into the distance." << endl;
+							cout << endl;
+							cout << "Well it looks like you're stuck here. " << endl;
+							cout << endl;
+
+							visitedTotenburg = 1;
+						}
+
+						// TEMP
+						cout << "Where do you want to go?" << endl;
+						string tBuildingOptions[5] = { "Town Hall", "Clack Clack Tavern", "Henry's Variety of Goods", " ", " " };
+						activeBuilding = getInput(3, tBuildingOptions);
+					}
+
+					// Town Hall
+					if (activeBuilding == 1) {
+						system("CLS");
+						cout << "Sorry, town hall's closed!" << endl;
+						system("PAUSE");
+						activeBuilding = 0;
+						// First visit
+						if (visitedTownHall == 0) {
+
+							visitedTownHall = 1;
+						}
+
+						// Rejected quest, visiting again
+						else if (visitedTownHall == 1 && mayoralMishapsOutcome == 0) {
+
+						}
+
+						// Visiting after quest complete
+						else {
+
+						}
+					}
+
+					// Clack Clack Tavern
+					if (activeBuilding == 2) {
+						system("CLS");
+						cout << "Sorry, tavern's closed!" << endl;
+						system("PAUSE");
+						activeBuilding = 0;
+						if (visitedClackClack == 0) {
+
+						}
+
+						else if (visitedClackClack == 1 && sharkHunterOutcome == 0) {
+
+						}
+
+						else {
+
+						}
+					}
+
+					// Henry's Variety
+					if (activeBuilding == 3) {
+
+						system("CLS");
+
+						if (visitedHenrysVariety == 0) {
+							cout << "You open the door to Henry's Variety of Goods and step inside." << endl;
+							cout << "It's totally empty, except for a small counter with a glass on it and a big keg labelled \"Milk\" with a tap on it." << endl;
+							cout << "Someone in a dark cloak is standing at the counter.You can't see their face, but you presume it's Henry." << endl;
+							cout << "He asks you to come in, in a wispy spooky voice of course." << endl;
+							cout << endl;
+							cout << "You walk up to the counter." << endl;
+							cout << "He asks you what he can do for you." << endl;
+							cout << "You ask him what he has for sale." << endl;
+							cout << "He slaps the top of the barrel and points to the glass." << endl;
+							cout << endl;
+							cout << "It appears he only sells milk." << endl;
+							cout << endl;
+
+							cout << "Do you... wanna buy some milk?" << endl;
+							cout << endl;
+							string milkOptions[5] = {"Yes", "No", " ", " ", " " };
+							int boughtMilk = getInput(2, milkOptions);
+
+							system("CLS");
+
+							// Bought Milk
+							if (boughtMilk == 1) {
+								cout << "You give him a coin and he pours your glass of milk." << endl;
+								cout << "You take a sip and tell him it taste like someone crushed up white chalk and mixed it with water." << endl;
+								cout << "He puts his head in his hands and begins to sob." << endl;
+								cout << "He tells you all about how someone in town made off with his cow and now his business is failing." << endl;
+								cout << "He doesn't know who to trust anymore and asks you if you can help." << endl;
+								cout << endl;
+
+								string milkManOptions[5] = { "[Start Quest] Yeah sure why not." , "Nah I have better things to do.", " ", " ", " " };
+								int milkManStarted = getInput(2, milkManOptions);
+
+								system("CLS");
+
+								if (milkManStarted == 1) {
+									activeBuilding = 0;
+									activeVillage = 0;
+									inQuest = 1;
+									activeQuest = 3;
+								}
+
+								else if (milkManStarted == 2) {
+									cout << "He sniffles and tells you that if you change your mind you should come back." << endl;
+									cout << "He says he would really appreciate it and probably give you something good." << endl;
+									cout << "Even though you're a heartless monster." << endl;
+									cout << "WHO DOESN'T EVEN CARE ABOUT A MAN AND HIS COW" << endl;
+									cout << endl;
+
+									system("PAUSE");
+									activeBuilding = 0;
+								}
+							}
+
+							// Didn't buy milk.
+							else if (boughtMilk == 2) {
+								cout << "He just kind of shrugs and goes quiet. Some variety they have here." << endl;
+								cout << endl;
+								string noMilkOptions[5] = { "Get out of here.", " ", " ", " ", " "};
+								int noMilkInput = getInput(1, noMilkOptions);
+								activeBuilding = 0;
+							}
+						}
+
+						else if (visitedHenrysVariety == 1 && milkManOutcome == 0) {
+							cout << "Are you here to help me with my cow?" << endl;
+						}
+
+						else {
+
+						}
+					}
+
+				}
+
 			}
 
 			while (inQuest) {
@@ -138,6 +317,7 @@ int main()
 				int currScene = 0;
 				int ans = 0;
 
+				// Basement Rats
 				while (activeQuest == 1) {
 					ans = BasementRats[currScene].play(tempCharHist);
 
@@ -270,6 +450,14 @@ int main()
 					}
 				}
 				
+				// Milk Man
+				while (activeQuest == 3) {
+					cout << "This worked!" << endl;
+					system("PAUSE");
+					inQuest = 0;
+					activeQuest = 0;
+					activeVillage = 2;
+				}
 			}
 		}
 
@@ -277,4 +465,27 @@ int main()
 
 // CLEAR MEMORY
 	delete menu;
+}
+
+int getInput(int numOptions, string options[5]) {
+	for (int i = 0; i < numOptions; i++) {
+		cout << i + 1 << " - " << options[i] << endl;
+	}
+	cout << endl;
+
+	int input;
+	bool validInput = false;
+
+	while (validInput == false) {
+		cin >> input;
+
+		if (input >= 1 && input <= numOptions) {
+			validInput = true;
+		}
+		else {
+			cout << "Not an option!" << endl;
+		}
+	}
+
+	return input;
 }

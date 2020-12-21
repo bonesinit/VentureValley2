@@ -11,5 +11,7 @@ using namespace std;
 #include "Scene.h"
 #include "Character.h"
 #include "Item.h"
+#include "Village.h"
+#include "Building.h"
 
 
