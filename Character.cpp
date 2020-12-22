@@ -77,6 +77,7 @@ void Player::printStats() {
 void Player::printInventoryStats() {
 	cout << "Inventory:" << endl;
 	for (int i = 0; i < 5; i++) {
+		cout << i + 1 << ": " << inventory[i].name << endl;
 	}
 	cout << "----------------------------------------------" << endl;
 	cout << "Stats:" << endl;
