@@ -8,6 +8,9 @@ void saveGame(Player player);
 
 Player loadGame();
 
+Item itemDatabase[50];
+Vendor vendorDatabase[30];
+
 int main()
 {
 // SETUP MENU
@@ -128,10 +131,22 @@ int main()
 		int sceneNum = i;
 		SharkHunter[i] = Scene(SharkHunterFile, sceneNum);
 	}
+// ITEM DATABASE
+	itemDatabase[0] = Item(0, "Empty", "Empty inventory slot");
+	itemDatabase[20] = Item(20, "Banana", "A long yellow thing. The mankeys love it!");
+	itemDatabase[21] = Item(21, "Suspicious Banana", "A long yellow thing. The mankeys love it!");
+
+// VENDOR DATABASE
+	vendorDatabase[20] = Vendor(20, "Phil", itemDatabase[20]); //Phil will be a banana vendor in Dellhollow.
+	vendorDatabase[21] = Vendor(21, "Morrissey", itemDatabase[21]); //Morrissey will be black market dealer in Dellhollow available to rogues.
 
 // SAVED VARIABLES
 	Player player;
 	player.id = 0;
+	for (int i = 0; i < 5; i++) {
+		player.inventory[i] = itemDatabase[0];
+	}
+	
 
 	int mayoralMishapsOutcome = 0;
 	int sharkHunterOutcome = 0;
@@ -199,7 +214,13 @@ int main()
 
 			// Load a saved game.
 			case 2:
-				loadGame();
+				player = loadGame();
+				inGame = true;
+				activeVillage = 2;
+				activeBuilding = 0;
+
+				inQuest = false; //change this to false when villages are implemented
+				activeQuest = 0;
 				break;
 
 			// Instructions
@@ -426,6 +447,14 @@ int main()
 							system("PAUSE");
 							activeBuilding = 0;
 						}
+					}
+
+					// Save Game
+					if (activeBuilding == 4) {
+						cout << "player: " << player.inventory[0].name << endl;
+						cout << "database: " << itemDatabase[0].name << endl;
+						system("PAUSE");
+						saveGame(player);
 					}
 
 				}
@@ -1042,6 +1071,8 @@ Player loadGame() {
 	
 	string nameToLoad = " ";
 	int archetypeToLoad = 0;
+	int statsToLoad[5] = { 1,1,1,1,1 };
+	int itemIdsToLoad[5] = { 0,0,0,0,0 };
 
 	if (saveDataTxt.is_open()) {
 		cout << "Opened save file!" << endl;
@@ -1075,19 +1106,54 @@ Player loadGame() {
 				}
 			}
 		}
+
+		//STATS
+		getline(saveDataTxt, line);
+		for (int i = 0; i < line.size(); i++) {
+			if (line.at(i) == startReadMarker)
+			{
+				int s = 0;
+				for (int j = i + 1; j < line.size(); j++) {
+					if (line.at(j) != ' ') {
+						statsToLoad[s] = line.at(j);
+						s++;
+					}
+				}
+			}
+		}
+
+		//ITEM IDS
+		getline(saveDataTxt, line);
+		for (int i = 0; i < line.size(); i++) {
+			if (line.at(i) == startReadMarker)
+			{
+				int s = 0;
+				for (int j = i + 1; j < line.size(); j++) {
+					if (line.at(j) != ' ') {
+						itemIdsToLoad[s] = line.at(j);
+						s++;
+					}
+				}
+			}
+		}
+
 	}
 	else {
 		cout << "Failed to load game!" << endl;
 	}
 	newPlayer.name = nameToLoad;
 	newPlayer.archetype = archetypeToLoad;
-
+	for (int i = 0; i < 5; i++) {
+		newPlayer.stats[i] = statsToLoad[i] - 48;
+	}
+	for (int i = 0; i < 5; i++) {
+		newPlayer.inventory[i] = itemDatabase[(itemIdsToLoad[i] - 48)];
+	}
+	
 
 	//close file
 	saveDataTxt.close();
 
-	cout << nameToLoad << endl;
-	cout << archetypeToLoad << endl;
 	system("PAUSE");
 	system("CLS");
 	return newPlayer;
