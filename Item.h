@@ -25,7 +25,7 @@ public:
 
 	Item();
 	Item(int id);
-	Item(int id, string name);
-	Item(int id, string name, string description);
+	Item(int newId, string newName);
+	Item(int newId, string newName, string description);
 
 };
