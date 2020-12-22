@@ -40,8 +40,6 @@ int main()
 	Building townHall;
 	Building clackClack;
 	Building henrysVariety;
-	bool visitedTownHall = 0;
-	bool visitedClackClack = 0;
 	bool visitedHenrysVariety = 0;
 
 // SETUP QUESTS
@@ -61,12 +59,28 @@ int main()
 		DellhollowIntro[i] = Scene(DellhollowIntroFile, sceneNum);
 	}
 
-	// Quest 3: Milk Man (activeQuest == 3) Totenburg side quest
-	Scene MilkMan[25];
+	// Quest 3: Milk Man (activeQuest == 3) Totenburg main quest
+	Scene MilkMan[40];
 	string MilkManFile = "Quests/MilkMan.txt";
-	for (int i = 0; i < 25; i++) {
+	for (int i = 0; i < 40; i++) {
 		int sceneNum = i;
 		MilkMan[i] = Scene(MilkManFile, sceneNum);
+	}
+
+	// Quest 4: Mayoral Mishaps
+	Scene MayoralMishaps[6];
+	string MayoralMishapsFile = "Quests/MayoralMishaps.txt";
+	for (int i = 0; i < 6; i++) {
+		int sceneNum = i;
+		MayoralMishaps[i] = Scene(MayoralMishapsFile, sceneNum);
+	}
+
+	// Quest 5: Shark Hunter
+	Scene SharkHunter[8];
+	string SharkHunterFile = "Quests/SharkHunter.txt";
+	for (int i = 0; i < 8; i++) {
+		int sceneNum = i;
+		SharkHunter[i] = Scene(SharkHunterFile, sceneNum);
 	}
 
 // SAVED VARIABLES
@@ -76,6 +90,14 @@ int main()
 	int mayoralMishapsOutcome = 0;
 	int sharkHunterOutcome = 0;
 	int milkManOutcome = 0;
+
+	int fireworks = 0;
+	int speedrunWand = 0;
+	int poison = 0;
+	int bigRock = 0;
+	int kickingBoots = 0;
+	int bartReceipt = 0;
+	int rudolfReceipt = 0;
 
 // ITEM DATABASE
 	Item itemDatabase[30]; //put all premade items here. see Item.h for constructor documentation.
@@ -191,43 +213,61 @@ int main()
 					// Town Hall
 					if (activeBuilding == 1) {
 						system("CLS");
-						cout << "Sorry, town hall's closed!" << endl;
-						system("PAUSE");
-						activeBuilding = 0;
-						// First visit
-						if (visitedTownHall == 0) {
 
-							visitedTownHall = 1;
+						if (mayoralMishapsOutcome == 0) {
+							cout << "You arrive at town hall and you meet two arguing skeletons. They introduce themselves as" << endl;
+							cout << "P. Bone Simmons and G. Scapulas Murphy. They introduce themselves as the vilage's two mayoral candidates" << endl;
+							cout << "since the old mayor died 362 years ago. The death was very unexpected and there's never actually been" << endl;
+							cout << "an election before since the old mayor was actually a warlord." << endl;
+							cout << "You ask about your horse, and they tell you horses weren't invented until 361 years ago, so by the default" << endl;
+							cout << "of the old laws horses are contraband." << endl;
+							cout << endl;
+
+							string townHallOptions[5] = { "[Start Quest] Help them solve their problem." , "Leave.", " ", " ", " " };
+							int townHallChoice = getInput(2, townHallOptions);
+
+							if (townHallChoice == 1) {
+								activeBuilding = 0;
+								activeVillage = 0;
+								inQuest = 1;
+								activeQuest = 4;
+							}
+							else if (townHallChoice == 2) {
+								activeBuilding = 0;
+							}
 						}
-
-						// Rejected quest, visiting again
-						else if (visitedTownHall == 1 && mayoralMishapsOutcome == 0) {
-
-						}
-
-						// Visiting after quest complete
-						else {
-
+						else if (mayoralMishapsOutcome > 0) {
+							cout << "\"Thanks for your help!\" says the mayor." << endl;
+							system("PAUSE");
+							activeBuilding = 0;
 						}
 					}
 
 					// Clack Clack Tavern
 					if (activeBuilding == 2) {
 						system("CLS");
-						cout << "Sorry, tavern's closed!" << endl;
-						system("PAUSE");
-						activeBuilding = 0;
-						if (visitedClackClack == 0) {
+						
+						cout << "You enter the tavern. It's a rough and tumble place." << endl;
+						cout << "To your left, there's a couple skeletons brawling. One gets his head punched off, puts it back on, and punches off the other guys head." << endl;
+						cout << "They just keep doing that. Nobody seems to care. Maybe thev're been at it for a while." << endl;
+						cout << "To your right is a bard playing a lute. He's actually pretty good." << endl;
+						cout << "Ahead of you is a bartender. She has a hook hand and two eye patches." << endl;
+						cout << "On her tunic is a pin that says \"Don't ask\"." << endl;
+						cout << "You walk up to her and she asks you what you want." << endl;
+						cout << endl;
+						string clackClackOptions[5] = { "[Start Quest] A quest!", "To leave.", " ", " ", " " };
+						int clackClackChoice = getInput(2, clackClackOptions);
 
+						if (clackClackChoice == 1) {
+							activeBuilding = 0;
+							activeVillage = 0;
+							inQuest = 1;
+							activeQuest = 5;
 						}
-
-						else if (visitedClackClack == 1 && sharkHunterOutcome == 0) {
-
+						else if (clackClackChoice == 2) {
+							activeBuilding = 0;
 						}
-
-						else {
-
-						}
+					
 					}
 
 					// Henry's Variety
@@ -482,11 +522,6 @@ int main()
 				int receiptsFound = 0;
 				// Milk Man
 				while (activeQuest == 3) {
-					if (currScene == 24) {
-						cout << "This is the end of the demo! Thanks for playing!" << endl;
-						system("PAUSE");
-					}
-
 					ans = MilkMan[currScene].play(charHistMilkMan);
 					
 					// Start
@@ -509,7 +544,7 @@ int main()
 							break;
 						// Visit Rudolf
 						case 4:
-							charHistMilkMan[0] = receiptsFound;
+							charHistMilkMan[0] = bartReceipt;
 							currScene = 14;
 							break;
 						}
@@ -519,6 +554,10 @@ int main()
 						currScene = 0;
 					}
 				// BART PLOTLINE
+					// Got receipt 2/2
+					else if (rudolfReceipt == 1 && bartReceipt == 1) {
+						currScene = 24;
+					}
 					// Visit Bart
 					else if (currScene == 3) {
 						switch (ans) {
@@ -539,12 +578,13 @@ int main()
 						// [Charisma] Sweet talk bart
 						case 10: 
 							currScene = 11;
-							receiptsFound++;
+							fireworks = 1;
+							bartReceipt = 1;
 							break;
 						// Bard Rock bart
 						case 11: 
 							currScene = 12;
-							receiptsFound++;
+							bartReceipt = 1;
 							break;
 						}
 					}
@@ -564,17 +604,17 @@ int main()
 						// Stab
 						case 2:
 							currScene = 7;
-							receiptsFound++;
+							bartReceipt = 1;
 							break;
 						// Strength
 						case 10: 
 							currScene = 8;
-							receiptsFound++;
+							bartReceipt = 1;
 							break;
 						}
 					}
 					// Got reciept, go back to Henry
-					else if ((currScene == 7 || currScene == 8 || currScene == 10 || currScene == 11 || currScene == 12) && receiptsFound == 1) {
+					else if ((currScene == 7 || currScene == 8 || currScene == 10 || currScene == 11 || currScene == 12) && bartReceipt == 1 && rudolfReceipt == 0) {
 						currScene = 13;
 					}
 					else if (currScene == 9) {
@@ -584,13 +624,14 @@ int main()
 							break;
 						case 10:
 							currScene = 10;
-							receiptsFound++;
+							fireworks = 1;
+							bartReceipt = 1;
 							break;
 						}
 					}
 					// Only Barts receipt, talk to Henry.
 					else if (currScene == 13) {
-						charHistMilkMan[0] = receiptsFound;
+						charHistMilkMan[0] = bartReceipt;
 						currScene = 14;
 					}
 				// RUDOLF PLOTLINE
@@ -607,14 +648,15 @@ int main()
 							charHistMilkMan[0] = player.archetype;
 							currScene = 17;
 							break;
-						case 11:
+						case 10:
+							rudolfReceipt = 1;
 							currScene = 22;
 							break;
 						}
 					}
 					// Messed up
 					else if (currScene == 15 || currScene == 16 || currScene == 20) {
-						charHistMilkMan[0] = receiptsFound;
+						charHistMilkMan[0] = bartReceipt;
 						currScene = 14;
 					}
 					// Chimney
@@ -628,34 +670,231 @@ int main()
 							break;
 						case 10:
 							currScene = 21;
-							receiptsFound++;
+							rudolfReceipt = 1;
 							break;
 						}
 					}	
 					else if (currScene == 18) {
 						currScene = 19;
-						receiptsFound++;
+						rudolfReceipt = 1;
 					}
 					// Got receipt 1/2
-					else if ((currScene == 19 || currScene == 21 || currScene == 22 || currScene == 21) && receiptsFound == 1) {
+					else if ((currScene == 19 || currScene == 21 || currScene == 22 || currScene == 21)) {
 						currScene = 23;
-					}
-					// Got receipt 2/2
-					else if (receiptsFound == 2) {
-						currScene = 24;
 					}
 					else if (currScene == 23) {
 						charHistMilkMan[0] = player.stats[3]; // charisma
 						charHistMilkMan[1] = player.archetype; // class
 						currScene = 3;
 					}
-					else if (currScene == 24) {
-						cout << "Congrats on completing our demo!" << endl;
-						cout << "Please close the game or it will explode!" << endl;
-						system("PAUSE");
+					// Report back to henry
+					// THIS IS ON PURPOSE Fixes an annoying bug
+					if (currScene == 24) {
+						charHistMilkMan[0] = fireworks;
+						currScene = 25;
+					}
+				// RESCUE THE COW!!!
+					// First choice at mausoleum
+					else if (currScene == 25) {
+						switch (ans) {
+						case 1:
+							currScene = 26;
+							break;
+						case 2:
+							currScene = 31;
+							break;
+						case 10:
+							currScene = 32;
+							break;
+						}
+					} 
+					// Create a commotion
+					else if (currScene == 26) {
+						switch (ans) {
+						case 1:
+							currScene = 27;
+							break;
+						case 2:
+							currScene = 28;
+							break;
+						}
+					}
+					// Yell
+					else if (currScene == 27) {
+						switch (ans) {
+						case 1:
+							charHistMilkMan[0] = player.archetype;
+							charHistMilkMan[1] = player.stats[2];
+							charHistMilkMan[3] = bigRock;
+							break;
+						case 2:
+							currScene = 30;
+							break;
+						}
+					}
+					// Bang on door
+					else if (currScene == 28) {
+						currScene = 25;
+					}
+					// Headed into mausoleum, fight/talk
+					else if (currScene == 29) {
+						switch (ans) {
+						case 1:
+							currScene = 33;
+							break;
+						case 2:
+							currScene = 34;
+							break;
+						case 10:
+							currScene = 35;
+							break;
+						case 11:
+							currScene = 36;
+							break;
+						case 12:
+							currScene = 37;
+							break;
+						}
+					}
+					// Keep being insane
+					else if (currScene == 30) {
+						bigRock = 1;
+						currScene = 29;
+					}
+					// Fail to break in
+					else if (currScene == 31) {
+						currScene = 25;
+					}
+					// Blow it up!
+					else if (currScene == 32) {
+						currScene = 39;
+					}
+					// Fail at talking him down
+					else if (currScene == 33) {
+					currScene = 35;
+					}
+					// Beat him up
+					else if (currScene == 34) {
+						currScene = 38;
+					}
+					// Raise undead army, convince him this is dumb, hit him with big rock
+					else if (currScene == 35 || currScene == 36 || currScene == 37) {
+						currScene = 39;
+					}
+					// Reward for half a cow
+					else if (currScene == 38) {
+						milkManOutcome = 1;
+						kickingBoots = 1;
+						activeVillage = 2;
+						activeQuest = 0;
+						inQuest = false;
+					}
+					// Reward for full cow
+					else if (currScene == 38) {
+						milkManOutcome = 2;
+						kickingBoots = 1;
+						speedrunWand = 1;
+						activeVillage = 2;
+						activeQuest = 0;
+						inQuest = false;
 					}
 				}
 				
+
+				int charHistMayoralMishaps[5];
+				// Mayoral Mishaps
+				while (activeQuest == 4) {
+
+					charHistMayoralMishaps[0] = speedrunWand;
+					ans = MayoralMishaps[currScene].play(charHistMayoralMishaps);
+
+					if (currScene == 0) {
+						switch (ans) {
+						case 1:
+							currScene = 1;
+							break;
+						case 2:
+							currScene = 2;
+							break;
+						case 10:
+							currScene = 3;
+							break;
+						}
+					}
+					else if (currScene == 1 || currScene == 2) {
+						switch (ans) {
+						case 1:
+							currScene = 4;
+							break;
+						case 2:
+							currScene = 5;
+							break;
+						}
+					}
+					else if (currScene == 3 || currScene == 4 || currScene == 5) {
+						if (currScene == 3) {
+							poison = 1;
+						}
+						activeVillage = 2;
+						activeQuest = 0;
+						inQuest = false;
+						mayoralMishapsOutcome = 1;
+					}
+				}
+
+				int charHistSharkHunter[5];
+				// Shark Hunter
+				while (activeQuest == 5) {
+					charHistSharkHunter[0] = player.stats[2];
+					charHistSharkHunter[1] = poison;
+
+					ans = SharkHunter[currScene].play(charHistSharkHunter);
+
+					if (currScene == 0) {
+						switch (ans) {
+						case 1: 
+							currScene = 2;
+							break;
+						case 2:
+							currScene = 1;
+						}
+					}
+					else if (currScene == 1) {
+						currScene = 0;
+					}
+					else if (currScene == 2) {
+						switch (ans) {
+						case 1:
+							currScene = 3;
+							break;
+						case 2:
+							currScene = 4;
+							break;
+						case 3:
+							currScene = 5;
+							break;
+						}
+					}
+					else if (currScene == 4) {
+						currScene = 6;
+						
+					}
+					else if (currScene == 5 || currScene == 3) {
+						currScene = 7;
+					}
+					else if (currScene == 6) {
+						activeVillage = 2;
+						activeQuest = 0;
+						inQuest = false;
+						sharkHunterOutcome = 1;
+					}
+					else if (currScene == 7) {
+						activeVillage = 2;
+						activeQuest = 0;
+						inQuest = false;
+						sharkHunterOutcome = 2;
+					}
+				}
 			}
 		}
 
