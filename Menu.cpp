@@ -18,6 +18,7 @@ int Menu::cinIntMinMax(int toCin, int min, int max) {
 		}
 		cout << "Not a valid option!\n";
 	} while (!valid);
+	playerArchetype = toCin;
 	return toCin;
 }
 

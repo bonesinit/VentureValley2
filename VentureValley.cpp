@@ -61,6 +61,14 @@ int main()
 		DellhollowIntro[i] = Scene(DellhollowIntroFile, sceneNum);
 	}
 
+	// Quest 3: Milk Man (activeQuest == 3) Totenburg side quest
+	Scene MilkMan[25];
+	string MilkManFile = "Quests/MilkMan.txt";
+	for (int i = 0; i < 25; i++) {
+		int sceneNum = i;
+		MilkMan[i] = Scene(MilkManFile, sceneNum);
+	}
+
 // SAVED VARIABLES
 	Player player;
 	player.id = 0;
@@ -289,14 +297,34 @@ int main()
 								int noMilkInput = getInput(1, noMilkOptions);
 								activeBuilding = 0;
 							}
+
+							visitedHenrysVariety = 1;
 						}
 
 						else if (visitedHenrysVariety == 1 && milkManOutcome == 0) {
-							cout << "Are you here to help me with my cow?" << endl;
+							cout << "\"Are you here to help me with my cow?\"" << endl;
+							cout << endl;
+							string milkManOptions[5] = { "[Start Quest] Yeah sure why not." , "Nah I have better things to do.", " ", " ", " " };
+							int milkManStarted = getInput(2, milkManOptions);
+
+							if (milkManStarted == 1) {
+								activeBuilding = 0;
+								activeVillage = 0;
+								inQuest = 1;
+								activeQuest = 3;
+							}
+
+							else if (milkManStarted == 2) {
+								activeBuilding = 0;
+							}
 						}
 
 						else {
-
+							cout << "\"Thanks again for helping me with my cow problem!\"" << endl;
+							cout << "\"Here's some milk on the house!\"" << endl;
+							cout << endl;
+							system("PAUSE");
+							activeBuilding = 0;
 						}
 					}
 
@@ -450,14 +478,184 @@ int main()
 					}
 				}
 				
+				int charHistMilkMan[5];
+				int receiptsFound = 0;
 				// Milk Man
 				while (activeQuest == 3) {
-					cout << "This worked!" << endl;
-					system("PAUSE");
-					inQuest = 0;
-					activeQuest = 0;
-					activeVillage = 2;
+					if (currScene == 24) {
+						cout << "This is the end of the demo! Thanks for playing!" << endl;
+						system("PAUSE");
+					}
+
+					ans = MilkMan[currScene].play(charHistMilkMan);
+					
+					// Start
+					if (currScene == 0) {
+						switch (ans) {
+						// Tell me about Bart
+						case 1:	
+							currScene = 1;
+							break;
+						// Tell me about Rudolf
+						case 2:
+							currScene = 2;
+							break;
+						// Visit Bart
+						case 3:
+							currScene = 3;
+							// Setup for next scene
+							charHistMilkMan[0] = player.stats[3]; // charisma
+							charHistMilkMan[1] = player.archetype; // class
+							break;
+						// Visit Rudolf
+						case 4:
+							charHistMilkMan[0] = receiptsFound;
+							currScene = 14;
+							break;
+						}
+					}
+					// Ask about Bart/Rudolf
+					else if (currScene == 1 || currScene == 2) {
+						currScene = 0;
+					}
+				// BART PLOTLINE
+					// Visit Bart
+					else if (currScene == 3) {
+						switch (ans) {
+						// Ask Bart about cow
+						case 1:
+							currScene = 4;
+							break;
+						// Violently ask Bart
+						case 2: 
+							currScene = 5;
+							charHistMilkMan[0] = player.stats[0]; // Strength
+							break;
+						// Sneak into Bart's place
+						case 3:
+							currScene = 9;
+							charHistMilkMan[0] = player.stats[4]; // Luck
+							break;
+						// [Charisma] Sweet talk bart
+						case 10: 
+							currScene = 11;
+							receiptsFound++;
+							break;
+						// Bard Rock bart
+						case 11: 
+							currScene = 12;
+							receiptsFound++;
+							break;
+						}
+					}
+					// Ask Bart
+					else if (currScene == 4 || currScene == 6) {
+						charHistMilkMan[0] = player.stats[3]; // charisma
+						charHistMilkMan[1] = player.archetype; // class
+						currScene = 3;
+					}
+					// Violently ask Bart
+					else if (currScene == 5) {
+						switch (ans) {
+						// Slap duck
+						case 1:
+							currScene = 6;
+							break;
+						// Stab
+						case 2:
+							currScene = 7;
+							receiptsFound++;
+							break;
+						// Strength
+						case 10: 
+							currScene = 8;
+							receiptsFound++;
+							break;
+						}
+					}
+					// Got reciept, go back to Henry
+					else if ((currScene == 7 || currScene == 8 || currScene == 10 || currScene == 11 || currScene == 12) && receiptsFound == 1) {
+						currScene = 13;
+					}
+					else if (currScene == 9) {
+						switch (ans) {
+						case 1:
+							currScene = 3;
+							break;
+						case 10:
+							currScene = 10;
+							receiptsFound++;
+							break;
+						}
+					}
+					// Only Barts receipt, talk to Henry.
+					else if (currScene == 13) {
+						charHistMilkMan[0] = receiptsFound;
+						currScene = 14;
+					}
+				// RUDOLF PLOTLINE
+					// Visit Rudolf
+					else if (currScene == 14) {
+						switch (ans) {
+						case 1:
+							currScene = 15;
+							break;
+						case 2:
+							currScene = 16;
+							break;
+						case 3:
+							charHistMilkMan[0] = player.archetype;
+							currScene = 17;
+							break;
+						case 11:
+							currScene = 22;
+							break;
+						}
+					}
+					// Messed up
+					else if (currScene == 15 || currScene == 16 || currScene == 20) {
+						charHistMilkMan[0] = receiptsFound;
+						currScene = 14;
+					}
+					// Chimney
+					else if (currScene == 17) {
+						switch (ans) {
+						case 1:
+							currScene = 18;
+							break;
+						case 2:
+							currScene = 20;
+							break;
+						case 10:
+							currScene = 21;
+							receiptsFound++;
+							break;
+						}
+					}	
+					else if (currScene == 18) {
+						currScene = 19;
+						receiptsFound++;
+					}
+					// Got receipt 1/2
+					else if ((currScene == 19 || currScene == 21 || currScene == 22 || currScene == 21) && receiptsFound == 1) {
+						currScene = 23;
+					}
+					// Got receipt 2/2
+					else if (receiptsFound == 2) {
+						currScene = 24;
+					}
+					else if (currScene == 23) {
+						charHistMilkMan[0] = player.stats[3]; // charisma
+						charHistMilkMan[1] = player.archetype; // class
+						currScene = 3;
+					}
+					else if (currScene == 24) {
+						cout << "Congrats on completing our demo!" << endl;
+						cout << "Please close the game or it will explode!" << endl;
+						system("PAUSE");
+					}
 				}
+				
 			}
 		}
 

@@ -1,0 +1,273 @@
+// OPENING ------------------------------------------------------------------------
+
+// Scene 0: Start (Return to from 1 and 2)
+0
+Henry is so happy! :) So excited you're helping him!
+He tells you he has two suspects. 
+Suspect 1: Barthalomew Sampson, noted animal theif.
+Suspect 2: Rudolf Wiggum, well-respected potion maker.
+!
+Tell me about Barthalomew.
+Tell me about Rudolf.
+Visit Barthalomew.
+Visit Rudolf.
+?
+
+// Scene 1: Tell me about Barthalomew.
+1
+He tells you that Barthalomew is a noted animal theif,
+con man, adulterer, magician, murderer, tax evader, and pro
+lute boarder.
+You ask him why they still let him live there. 
+He shrugs and says "Hey, he's pretty good on a lute board."
+!
+Ok
+?
+
+// Scene 2: Tell me about Rudolf.
+2
+He tells you that up until recently, Rudolf's potions have been 
+pretty weak. But not long after Henry's cow was stolen, Rudolf 
+starting selling new calcium pills.
+You ask him how skeletons can take pills.
+He tells you they take them the same way they drink milk.
+!
+Ok
+?
+
+// Scene 3: Visit Barthalomew (Return if Ask Bart about cow, shake bart down for answers). 
+3
+You arrive at Barthalomew's cave. 
+There's a lot of big spikes outside and signs that say "Keep Out!", "No Girls Allowed",
+and "Eat My Tunic!".
+He seems like a pleasant enough guy.
+How are you going to go about this?
+!
+Ask him about the cow.
+Violently ask him about the cow.
+Sneak in without him seeing you and look for the cow.
+!
+@
+_5
+[Charisma] Sweet talk it out of him.
+#
+_4
+[Bard] See if you can appeal to his sense of Rock n' Roll.
+?
+
+// Scene 4: Ask Bart about the cow. 
+4
+You yell into the dark cave asking about the cow.
+A rock flys out of the darkness and hits you on the head.
+There's a note attached to it. In childlike scrawl it says,
+"I doN't have a Cow, man! >:("
+!
+Well that was useless.
+?
+
+// Scene 5: Violently ask Bart about the cow. 
+5
+You walk into the cave like you own the place and see
+Barthalomew the skeleton pretending to eat a roasted duck. 
+"I'm Barthalomew Sampson, who the hell are you?"
+You're worst frickin' nightmare, kiddo.
+How are you gonna do this?
+!
+Slap the duck out of his hands and shake him down for answers.
+Stab him now and find the cow later. 
+!
+@
+_6
+[Strength] Indimidate him with your muscles.
+?
+
+// Scene 6: Shake Bart down for answers.
+6
+"Hey, I stole that!" 
+You have a fierce struggle, but he gets the best of you 
+and kicks you out.
+!
+Aw man :( 
+?
+
+// Scene 7: Stab him and look for the cow
+7
+You straight up stab this guy and he dies.
+No one will ever witness his lute boarding (or be robbed/murdered)
+again. You look through all of his stuff but don't find any cow. 
+You do find half a reciept though. 
+!
+Take the reciept and report back to Henry.
+?
+
+// Scene 8: Intimidate him with your muscles
+8
+Someone had better call a doctor because thesE PUPPIES ARE SICK!
+Barthalomew all but soils himself and starts spilling the beans.
+He tells you that him and Rudolf stole and sold the cow to some guy, 
+but he only has half the reciept. 
+He tells you some lute-boarding tips, since you're so cool.
+!
+Nice! Take the reciept and report back to Henry.
+?
+
+// Scene 9: Sneak in without him seeing you and look for the cow
+9
+You look around but don't see a cow around. 
+Maybe there's something else here?
+!
+No there isn't.
+!
+@
+_4
+[Luck] Yes there is.
+?
+
+// Scene 10: Found receipt while sneaking.
+10
+Awesome! You found half a receipt for the sale of the cow. 
+You also find some illegal fireworks! Don't mind if I do!
+!
+Report back to Henry.
+?
+
+// Scene 11: Sweet talk it out of him.
+11
+You walk in spouting some story about being a broom salesman.
+You compliment Barthalomew on his choice of decor (a lie) and tell him
+you're a crime memorobilia collector (half truth). You ask him if he has
+any proof of a crime and he gives you a half a reciept and some illegal fireworks.
+!
+Report back to Henry.
+?
+
+// Scene 12: Rock n' roll it out of him.
+12
+You sing some song about stealing a cow into the cave entrance. Barthalomew comes out
+and joins you and during the chorus you two have a lovely duet about how he sold the cow 
+and how the only proof he has is half a reciept, which he waves in the air like a lighter.
+You clock him in the face, grab the reciept, and run.
+!
+Report back to Henry.
+?
+
+// Scene 13: Report back to Henry
+13
+You return to Henry's variety of goods with the reciept. He excitedly takes the reciept from you.
+He points out half a name cut off by the rip. Rudolf's signature is on the bottom of the reciept. 
+!
+Pay Rudolf a visit.
+?
+
+// RUDOLF PLOTLINE ---------------------------------------------------------------------
+
+// Scene 14: Visit Rudolf
+14
+You walk across the street to Wiggum's Apothecary.
+There's a little chimney coming out of the roof expelling green sparkly smoke.
+It smells like... frogs?
+!
+Walk in and strike up a conversation.
+I bet if I ransack the place I'll find a cow somewhere. 
+Maybe if I climb down that chimney I can sneak in.
+!
+#
+_1
+[Reciept] Confront him with the receipt.
+?
+
+// Scene 15: Strike up a conversation.
+15
+You walk in ready to lay down the law on this guy, but before you know it you're walking
+out again with arms full of useless bone-related potions.
+!
+Let's try that again.
+?
+
+// Scene 16: Ransack the place.
+16
+You run in and start throwing things around, desperately looking for the cow.
+Since its a two room hut, it's not long before you've turned the entire place over.
+Rudolf whips you with a pair of eels until you leave.
+!
+Okay so that didn't work.
+?
+
+// Scene 17: Sneak in down the chimney.
+17
+You climb up to the roof by moving a few crates into a staircase. Unfortunately, ladders haven't
+been invented yet. Thomas Ladder needs to hurry up.
+You climb into the chimney and slide down with ease. 
+You land directly into a cauldron full of a green potion, which thankfully is a potion that heals 
+burns, because its boiling over a fire.
+!
+Get out of the cauldron!
+You know, this is kinda nice. Maybe I'll just relax...
+!
+#
+_6
+[Shaman/Druid] Hey wait a second... this tastes a little milky...
+?
+
+// Scene 18: Get out of the cauldron.
+18
+You get out of the cauldron, soaked from head to toe in green goo. 
+!
+Alright, lets Scooby Doo this and scare the crap out of this guy.
+?
+
+// Scene 19: Scooby Doo
+19
+You walk into the main room waving your arms around like you're the green tar man.
+"I'm the green tar man!" you say.
+Upon seeing you, Rudolf drinks an Overdramatic Suicide Potion and faints to the ground.
+You hold him. "In my last confession... I want to give you this half of a receipt. I stole a cow.
+That was really bad of me." He re-dies in your arms. 
+!
+Nice!
+?
+
+// Scene 20: Sleep in the cauldron.
+20
+You fall asleep in the cauldron and have pleasant dreams.
+You wake up to yelling when Rudolf discovers you and he whips you with eels until you leave.
+You've slept worse.
+!
+Let's try another approach.
+?
+
+// Scene 21: Taste the potion.
+21
+You taste to potion and suddenly... you Know. You know this potion was made from the milk of Henry's
+cow. You know Rudolf and Barthalomew were just pawns for a mysterious benefactor. You know that there
+is proof in the form of half a receipt in the chest on the other side of the room. 
+!
+Yoink! I'll take that and go back to Henry.
+?
+
+// Scene 22: Confront him with the reciept. 
+22
+You march right in there and confront Rudolf with the receipt. He starts to cry and tell you a sob story
+about how he needed to do it for his business. Yeah yeah, that's what they alllll say. You ask him for the 
+other receipt half and he obliges.
+!
+Return to Henry.
+?
+
+// Scene 23: Return to Henry
+23
+You return to Henry's variety of goods with the reciept. He excitedly takes the reciept from you.
+He points out half a name cut off by the rip. Barthalomew's signature is on the bottom of the reciept. 
+!
+Pay Barthalomew a visit.
+?
+
+// Scene 24: Both receipt halves found. 
+24
+You've found both receipts! Henry lines them up reads the name to you. "Guard T. Boney". Henry describes
+him to you and you recognize that he's the guard who confiscated your horse. 
+!
+Let's go visit the guard, Guard.
+?
+
+// RESCUE COW PLOTLINE -----------------------------------------------------------------
