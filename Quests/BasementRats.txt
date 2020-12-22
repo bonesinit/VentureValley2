@@ -12,7 +12,7 @@ _5
 [Strength] Punch
 #
 _1
-[Rogue] Hide
+[Rouge] Hide
 ?
 
 // Scene 1: Ran in scene 0.
