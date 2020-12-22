@@ -20,8 +20,11 @@ public:
 															everyone has been turned into monkeys.
 	*/
 
-	string buildings[5];
-	string descBuild[5];
+	bool visitedVill = false;
+
+	bool buildingActive[4];
+	string buildings[4];
+	string descBuild[4];
 	/* Example:
 		1 - Blacksmith
 		2 - Town Hall
@@ -30,6 +33,7 @@ public:
 		5 - Inn
 	*/
 
-	void printBuildings(int indexVill, int indexBuild);
+	int goChoice;
 
+	void printBuildings(int indexVill, int indexBuild);
 };
