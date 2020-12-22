@@ -26,13 +26,13 @@ Item::Item(int id) {
 	id = id;
 }
 
-Item::Item(int id, string name) {
-	id = id;
-	name = name;
+Item::Item(int newId, string newName) {
+	id = newId;
+	name = newName;
 }
 
-Item::Item(int id, string name, string description) {
-	id = id;
-	name = name;
+Item::Item(int newId, string newName, string description) {
+	id = newId;
+	name = newName;
 	descItem = description;
 }

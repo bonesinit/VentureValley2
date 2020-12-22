@@ -4,6 +4,10 @@
 // This is just for in village stuff.
 int getInput(int numOptions, string options[5]);
 
+void saveGame(Player player);
+
+Player loadGame();
+
 int main()
 {
 // SETUP MENU
@@ -53,15 +57,7 @@ int main()
 		BasementRats[i] = Scene(BasementRatsFile, sceneNum);
 	}
 
-	// Test Quest 2: Dellhollow Intro (activeQuest == 2). feel free to bump this quest back a bunch if you want yours to be consecutive.
-	Scene DellhollowIntro[2];
-	string DellhollowIntroFile = "Quests/JoshTestQuest.txt";
-	for (int i = 0; i < 2; i++) {
-		int sceneNum = i;
-		DellhollowIntro[i] = Scene(DellhollowIntroFile, sceneNum);
-	}
-
-	// Quest 3: Milk Man (activeQuest == 3) Totenburg side quest
+// Quest 3: Milk Man (activeQuest == 3) Totenburg side quest
 	Scene MilkMan[25];
 	string MilkManFile = "Quests/MilkMan.txt";
 	for (int i = 0; i < 25; i++) {
@@ -69,17 +65,18 @@ int main()
 		MilkMan[i] = Scene(MilkManFile, sceneNum);
 	}
 
-// SAVED VARIABLES
-	Player player;
-	player.id = 0;
-
-	int mayoralMishapsOutcome = 0;
-	int sharkHunterOutcome = 0;
-	int milkManOutcome = 0;
+// Quest 2: Dellhollow Intro (activeQuest == 20).
+	Scene DellhollowIntro[2];
+	string DellhollowIntroFile = "Quests/JoshTestQuest.txt";
+	for (int i = 0; i < 2; i++) {
+		int sceneNum = i;
+		DellhollowIntro[i] = Scene(DellhollowIntroFile, sceneNum);
+	}
 
 // ITEM DATABASE
 	Item itemDatabase[30]; //put all premade items here. see Item.h for constructor documentation.
-	
+
+	itemDatabase[0] = Item(0, "Empty", "Empty inventory slot");
 	itemDatabase[20] = Item(20, "Banana", "A long yellow thing. The mankeys love it!");
 	itemDatabase[21] = Item(21, "Suspicious Banana", "A long yellow thing. The mankeys love it!");
 
@@ -88,6 +85,18 @@ int main()
 
 	vendorDatabase[20] = Vendor(20, "Phil", itemDatabase[20]); //Phil will be a banana vendor in Dellhollow.
 	vendorDatabase[21] = Vendor(21, "Morrissey", itemDatabase[21]); //Morrissey will be black market dealer in Dellhollow available to rogues.
+
+// SAVED VARIABLES
+	Player player;
+	player.id = 0;
+	for (int i = 0; i < 5; i++) {
+		player.inventory[i] = itemDatabase[0];
+	}
+	
+
+	int mayoralMishapsOutcome = 0;
+	int sharkHunterOutcome = 0;
+	int milkManOutcome = 0;
 
 // GAMEPLAY LOOP
 	while (!quit) {
@@ -117,6 +126,7 @@ int main()
 
 			// Load a saved game.
 			case 2:
+				loadGame();
 				break;
 
 			// Instructions
@@ -184,8 +194,8 @@ int main()
 
 						// TEMP
 						cout << "Where do you want to go?" << endl;
-						string tBuildingOptions[5] = { "Town Hall", "Clack Clack Tavern", "Henry's Variety of Goods", " ", " " };
-						activeBuilding = getInput(3, tBuildingOptions);
+						string tBuildingOptions[5] = { "Town Hall", "Clack Clack Tavern", "Henry's Variety of Goods", "Save Game", " " };
+						activeBuilding = getInput(4, tBuildingOptions);
 					}
 
 					// Town Hall
@@ -326,6 +336,14 @@ int main()
 							system("PAUSE");
 							activeBuilding = 0;
 						}
+					}
+
+					// Save Game
+					if (activeBuilding == 4) {
+						cout << "player: " << player.inventory[0].name << endl;
+						cout << "database: " << itemDatabase[0].name << endl;
+						system("PAUSE");
+						saveGame(player);
 					}
 
 				}
@@ -686,4 +704,95 @@ int getInput(int numOptions, string options[5]) {
 	}
 
 	return input;
+}
+
+void saveGame(Player player) {
+
+	//Open file
+	ofstream saveDataTxt("saveData.txt", ios::trunc); //opens file, makes one if the filename doesn't exist
+	//saveDataTxt.open("saveData.txt");
+
+	if (saveDataTxt.is_open()) {
+		//Name
+		saveDataTxt << "Name: " << player.name << "\n";
+
+		//Archetype
+		saveDataTxt << "Archetype ID: " << player.archetype << "\n";
+
+		//Stats
+		saveDataTxt << "Stats: ";
+		for (int i = 0; i < 5; i++)
+		{
+			saveDataTxt << player.stats[i];
+			saveDataTxt << " ";
+		}
+		saveDataTxt << "\n";
+
+		//Items
+		saveDataTxt << "Item IDs: ";
+		for (int i = 0; i < 5; i++)
+		{
+			saveDataTxt << player.getItemID(i);
+			saveDataTxt << " ";
+		}
+		saveDataTxt << "\n";
+
+		//Current Village
+
+
+		//Confirmation message
+		cout << "Game has been saved!" << endl;
+
+		//close file
+		saveDataTxt.close();
+
+		system("PAUSE");
+		system("CLS");
+	}
+	else {
+		cout << "Failed to open file!" << endl;
+	}
+
+}
+
+Player loadGame() {
+	Player newPlayer;
+	string line;
+	char statsToSave[5];
+	char startReadMarker = ':';
+	ifstream saveDataTxt("saveData.txt"); //opens file, makes one if the filename doesn't exist
+	//saveDataTxt.open("saveData.txt");
+
+	if (saveDataTxt.is_open()) {
+		while (getline(saveDataTxt, line)) {
+			for (int i = 0; i < line.size(); i++) {
+				if (line.at(i) == startReadMarker)
+				{
+					for (int j = i; j < line.size(); j++) {
+						int s = 0;
+						if (line.at(j) != ' ') {
+							statsToSave[s] = line.at(j);
+							s++;
+						}
+					}
+					
+				}
+				else {
+					//cout << " ";
+				}
+			}
+			//cout << "\n";
+			cout << statsToSave;
+		}
+	}
+	else {
+		cout << "Failed to load game!" << endl;
+	}
+
+	//close file
+	saveDataTxt.close();
+
+	system("PAUSE");
+	system("CLS");
+	return newPlayer;
 }
