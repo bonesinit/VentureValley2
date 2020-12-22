@@ -26,6 +26,28 @@ int main()
 	int activeBuilding	=	0;
 
 // SETUP VILLAGES
+	// Village 1: Ptelios
+
+	Village ptelios;
+	ptelios.villageName = "Ptelios";
+	ptelios.visitedVill = false;
+	ptelios.descType = "Town with an ancient temple. The villagers worship the sun god Helios. They are known for their ancient hero, Pete.";
+	ptelios.buildings[0] = "Blacksmith";
+	ptelios.buildings[1] = "Town Hall";
+	ptelios.buildings[2] = "General Store";
+	ptelios.buildings[3] = "Temple";
+	ptelios.buildings[4] = "Inn";
+	ptelios.descBuild[0] = "A heavy clang bursts through the village chatter. You know you would find any armoured goods if you were to enter.";
+	ptelios.descBuild[1] = "Guards stand on either side of the large wooden doors. This extra bit of security tells you that someone important is inside. You would find the mayor here.";
+	ptelios.descBuild[2] = "The familiar sign of the trademarked good store sends a warmth through you. You know you would find material goods you needed there.";
+	ptelios.descBuild[3] = "At the very centre of the town stands a large ancient temple. Villagers filter in and out of it in silence. Faces of the village hero, Pete stare at you from where gargoyles would be.";
+	ptelios.descBuild[4] = "The sweet aroma of warm food fills your nostrils while the jovial laughter of tavern-goers meets your ears. You can tell that you would find many villagers frequenting the place.";
+	ptelios.buildingActive[0] = true;
+	ptelios.buildingActive[1] = true;
+	ptelios.buildingActive[2] = true;
+	ptelios.buildingActive[3] = true;
+	ptelios.buildingActive[4] = true;
+
 	// Village 2: Totenburg
 	Village totenburg;
 	totenburg.villageName = "Totenburg";
@@ -39,6 +61,24 @@ int main()
 	bool visitedTotenburg = 0;
 
 // SETUP BUILDINGS
+	//Village 1: Ptelios
+	Building blacksmith;
+	Building townBuild;
+	Building generalStore;
+	Building temple;
+	Building inn;
+	blacksmith.visitedBuild = false;
+	blacksmith.descType = "As you enter, a burly figure is leaning over an anvil hammering out the edge of a blade. A young boy watches, eager to learn the craft. On the other end stands a customer who is looking at the various weapon displays.";
+	townBuild.visitedBuild = false;
+	townBuild.descType = "The guards open the doors for you, and you see a large hall with a chair at the end. A man sits at it, listening to a villager. At his side is a scribe and an advisor.";
+	generalStore.visitedBuild = false;
+	generalStore.descType = "You find the store to be very welcoming, the warm light shining on the pale yellow and white bricked walls. You see the store manager behind the counter, chatting amiably with a mother and their child.";
+	temple.visitedBuild = false;
+	temple.descType = "As you enter, you are encapsulated in silence. Everytime you think of speaking, you find your throat is dry. You see someone praying in a pew. At the front is a tall statue of a person surrounded by a large sun. You can see a few priestess reading from a text.";
+	inn.visitedBuild = false;
+	inn.descType = "When you enter the inn, you are met with warm air and raucous laughter. Someone throws their arm around you and cheers while others thump you on the back in greeting. Many people are gathered here, and you can see a bartender making drinks behind their bar.";
+
+
 	// Village 2: Totenburg
 	// TODO LATER
 	Building townHall;
@@ -75,14 +115,26 @@ int main()
 
 // ITEM DATABASE
 	Item itemDatabase[30]; //put all premade items here. see Item.h for constructor documentation.
+	//Ptelios
+	itemDatabase[10] = Item(10, "Chainmail Armour", "The best armour on the market. No death-free guarantee. Warranty-free!");
+	itemDatabase[11] = Item(11, "Coffee", "Not high-end, but enough to get you going in the morning. No death-free guarantee.");
+	itemDatabase[12] = Item(12, "Slippery Slope Pint", "After a long day, it's nice to relax. Strongest alcohol in the village. No death-free guarantee.");
+	itemDatabase[13] = Item(13, "Scroll", "The scroll reads, after some translation: The fourth stone on the eastern wall, six feet to the bone you must crawl.");
+	itemDatabase[14] = Item(14, "Candles", "Multiple sets of candles to light up the temple.");
 
+	//Dellhollow
 	itemDatabase[0] = Item(0, "Empty", "Empty inventory slot");
 	itemDatabase[20] = Item(20, "Banana", "A long yellow thing. The mankeys love it!");
 	itemDatabase[21] = Item(21, "Suspicious Banana", "A long yellow thing. The mankeys love it!");
 
 // VENDOR DATABASE
 	Vendor vendorDatabase[30]; //put all premade vendors here. see Character.h for constructor documentation.
+	//Ptelios
+	vendorDatabase[10] = Vendor(10, "Farley", itemDatabase[10]); //he has special armour he is making.
+	vendorDatabase[11] = Vendor(11, "Jarson", itemDatabase[11]); //he sells all sorts of items at the general goods store
+	vendorDatabase[12] = Vendor(12, "Polly", itemDatabase[12]); //if you need a drink after a long day, she's your gal.
 
+	// Dellhollow
 	vendorDatabase[20] = Vendor(20, "Phil", itemDatabase[20]); //Phil will be a banana vendor in Dellhollow.
 	vendorDatabase[21] = Vendor(21, "Morrissey", itemDatabase[21]); //Morrissey will be black market dealer in Dellhollow available to rogues.
 
