@@ -1,0 +1,4 @@
+Name: hamburgerhelper
+Archetype ID: 2
+Stats: 1 1 1 1 1 
+Item IDs: 0 0 0 0 0 
