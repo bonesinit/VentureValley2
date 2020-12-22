@@ -12,11 +12,10 @@ using namespace std;
 #include <iostream>
 
 class Building {
-public:
 	string buildingName;
 	string descType;
 	string characterList[3];
-	bool visitedBuild;
+
 	/* Example:
 		1 - Blacksmith
 				1 - Blacksmith

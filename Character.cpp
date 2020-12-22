@@ -62,30 +62,8 @@ bool Player::skillCheck(int statIndex, int numToBeat) {
 	return false;
 }
 
-void Player::printInventory() {
-	cout << "Inventory:" << endl;
-	for (int i = 0; i < 5; i++) {
-		cout << i + 1 << ": " << inventory[i].name << endl;
-	}
-}
-
-void Player::printStats() {
-	cout << "Stats:" << endl;
-	cout << "Strength: " << stats[0] << " | Agility: " << stats[1] << " | Intelligence: " << stats[2] << " | Charisma: " << stats[3] << " | Luck: " << stats[4] << endl;
-}
-
-void Player::printInventoryStats() {
-	cout << "Inventory:" << endl;
-	for (int i = 0; i < 5; i++) {
-		cout << i + 1 << ": " << inventory[i].name << endl;
-	}
-	cout << "----------------------------------------------" << endl;
-	cout << "Stats:" << endl;
-	cout << "Strength: " << stats[0] << " | Agility: " << stats[1] << " | Intelligence: " << stats[2] << " | Charisma: " << stats[3] << " | Luck: " << stats[4] << endl;
-}
-
 Player::Player() {
-	id = 0;
+	
 }
 
 

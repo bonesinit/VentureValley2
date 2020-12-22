@@ -52,10 +52,6 @@ public:
 	bool skillCheckChance(int statIndex, int numToBeat); //true if chosen stat + random num between 1 and luck stat beats numToBeat
 	bool skillCheck(int statIndex, int numToBeat); //tests stat against numtoBeat
 
-	void printInventory();
-	void printStats();
-	void printInventoryStats();
-
 	Player(); //no cosntructors needed since only one player is ever instantiated
 };
 

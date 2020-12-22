@@ -5,7 +5,6 @@
 
 #include "Village.h"
 
-/*
 void Village::printBuildings(int indexVill, int indexBuild) {
 
 	cout << villageName << endl;
@@ -36,8 +35,6 @@ void Village::printBuildings(int indexVill, int indexBuild) {
 	//call the whereto switch scene statement to move into a building.
 	whereTo(int indexBuild);
 }
-*/
-
 
 void whereTo(int goChoice) {
 

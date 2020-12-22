@@ -4,10 +4,6 @@
 // This is just for in village stuff.
 int getInput(int numOptions, string options[5]);
 
-void saveGame(Player player);
-
-Player loadGame();
-
 int main()
 {
 // SETUP MENU
@@ -26,28 +22,6 @@ int main()
 	int activeBuilding	=	0;
 
 // SETUP VILLAGES
-	// Village 1: Ptelios
-
-	Village ptelios;
-	ptelios.villageName = "Ptelios";
-	ptelios.visitedVill = false;
-	ptelios.descType = "Town with an ancient temple. The villagers worship the sun god Helios. They are known for their ancient hero, Pete.";
-	ptelios.buildings[0] = "Blacksmith";
-	ptelios.buildings[1] = "Town Hall";
-	ptelios.buildings[2] = "General Store";
-	ptelios.buildings[3] = "Temple";
-	ptelios.buildings[4] = "Inn";
-	ptelios.descBuild[0] = "A heavy clang bursts through the village chatter. You know you would find any armoured goods if you were to enter.";
-	ptelios.descBuild[1] = "Guards stand on either side of the large wooden doors. This extra bit of security tells you that someone important is inside. You would find the mayor here.";
-	ptelios.descBuild[2] = "The familiar sign of the trademarked good store sends a warmth through you. You know you would find material goods you needed there.";
-	ptelios.descBuild[3] = "At the very centre of the town stands a large ancient temple. Villagers filter in and out of it in silence. Faces of the village hero, Pete stare at you from where gargoyles would be.";
-	ptelios.descBuild[4] = "The sweet aroma of warm food fills your nostrils while the jovial laughter of tavern-goers meets your ears. You can tell that you would find many villagers frequenting the place.";
-	ptelios.buildingActive[0] = true;
-	ptelios.buildingActive[1] = true;
-	ptelios.buildingActive[2] = true;
-	ptelios.buildingActive[3] = true;
-	ptelios.buildingActive[4] = true;
-
 	// Village 2: Totenburg
 	Village totenburg;
 	totenburg.villageName = "Totenburg";
@@ -61,31 +35,11 @@ int main()
 	bool visitedTotenburg = 0;
 
 // SETUP BUILDINGS
-	//Village 1: Ptelios
-	Building blacksmith;
-	Building townBuild;
-	Building generalStore;
-	Building temple;
-	Building inn;
-	blacksmith.visitedBuild = false;
-	blacksmith.descType = "As you enter, a burly figure is leaning over an anvil hammering out the edge of a blade. A young boy watches, eager to learn the craft. On the other end stands a customer who is looking at the various weapon displays.";
-	townBuild.visitedBuild = false;
-	townBuild.descType = "The guards open the doors for you, and you see a large hall with a chair at the end. A man sits at it, listening to a villager. At his side is a scribe and an advisor.";
-	generalStore.visitedBuild = false;
-	generalStore.descType = "You find the store to be very welcoming, the warm light shining on the pale yellow and white bricked walls. You see the store manager behind the counter, chatting amiably with a mother and their child.";
-	temple.visitedBuild = false;
-	temple.descType = "As you enter, you are encapsulated in silence. Everytime you think of speaking, you find your throat is dry. You see someone praying in a pew. At the front is a tall statue of a person surrounded by a large sun. You can see a few priestess reading from a text.";
-	inn.visitedBuild = false;
-	inn.descType = "When you enter the inn, you are met with warm air and raucous laughter. Someone throws their arm around you and cheers while others thump you on the back in greeting. Many people are gathered here, and you can see a bartender making drinks behind their bar.";
-
-
 	// Village 2: Totenburg
 	// TODO LATER
 	Building townHall;
 	Building clackClack;
 	Building henrysVariety;
-	bool visitedTownHall = 0;
-	bool visitedClackClack = 0;
 	bool visitedHenrysVariety = 0;
 
 // SETUP QUESTS
@@ -97,15 +51,7 @@ int main()
 		BasementRats[i] = Scene(BasementRatsFile, sceneNum);
 	}
 
-// Quest 3: Milk Man (activeQuest == 3) Totenburg side quest
-	Scene MilkMan[25];
-	string MilkManFile = "Quests/MilkMan.txt";
-	for (int i = 0; i < 25; i++) {
-		int sceneNum = i;
-		MilkMan[i] = Scene(MilkManFile, sceneNum);
-	}
-
-// Quest 2: Dellhollow Intro (activeQuest == 20).
+	// Test Quest 2: Dellhollow Intro (activeQuest == 2). feel free to bump this quest back a bunch if you want yours to be consecutive.
 	Scene DellhollowIntro[2];
 	string DellhollowIntroFile = "Quests/JoshTestQuest.txt";
 	for (int i = 0; i < 2; i++) {
@@ -113,42 +59,57 @@ int main()
 		DellhollowIntro[i] = Scene(DellhollowIntroFile, sceneNum);
 	}
 
+	// Quest 3: Milk Man (activeQuest == 3) Totenburg main quest
+	Scene MilkMan[40];
+	string MilkManFile = "Quests/MilkMan.txt";
+	for (int i = 0; i < 40; i++) {
+		int sceneNum = i;
+		MilkMan[i] = Scene(MilkManFile, sceneNum);
+	}
+
+	// Quest 4: Mayoral Mishaps
+	Scene MayoralMishaps[6];
+	string MayoralMishapsFile = "Quests/MayoralMishaps.txt";
+	for (int i = 0; i < 6; i++) {
+		int sceneNum = i;
+		MayoralMishaps[i] = Scene(MayoralMishapsFile, sceneNum);
+	}
+
+	// Quest 5: Shark Hunter
+	Scene SharkHunter[8];
+	string SharkHunterFile = "Quests/SharkHunter.txt";
+	for (int i = 0; i < 8; i++) {
+		int sceneNum = i;
+		SharkHunter[i] = Scene(SharkHunterFile, sceneNum);
+	}
+
+// SAVED VARIABLES
+	Player player;
+	player.id = 0;
+
+	int mayoralMishapsOutcome = 0;
+	int sharkHunterOutcome = 0;
+	int milkManOutcome = 0;
+
+	int fireworks = 0;
+	int speedrunWand = 0;
+	int poison = 0;
+	int bigRock = 0;
+	int kickingBoots = 0;
+	int bartReceipt = 0;
+	int rudolfReceipt = 0;
+
 // ITEM DATABASE
 	Item itemDatabase[30]; //put all premade items here. see Item.h for constructor documentation.
-	//Ptelios
-	itemDatabase[10] = Item(10, "Chainmail Armour", "The best armour on the market. No death-free guarantee. Warranty-free!");
-	itemDatabase[11] = Item(11, "Coffee", "Not high-end, but enough to get you going in the morning. No death-free guarantee.");
-	itemDatabase[12] = Item(12, "Slippery Slope Pint", "After a long day, it's nice to relax. Strongest alcohol in the village. No death-free guarantee.");
-	itemDatabase[13] = Item(13, "Scroll", "The scroll reads, after some translation: The fourth stone on the eastern wall, six feet to the bone you must crawl.");
-	itemDatabase[14] = Item(14, "Candles", "Multiple sets of candles to light up the temple.");
-
-	//Dellhollow
-	itemDatabase[0] = Item(0, "Empty", "Empty inventory slot");
+	
 	itemDatabase[20] = Item(20, "Banana", "A long yellow thing. The mankeys love it!");
 	itemDatabase[21] = Item(21, "Suspicious Banana", "A long yellow thing. The mankeys love it!");
 
 // VENDOR DATABASE
 	Vendor vendorDatabase[30]; //put all premade vendors here. see Character.h for constructor documentation.
-	//Ptelios
-	vendorDatabase[10] = Vendor(10, "Farley", itemDatabase[10]); //he has special armour he is making.
-	vendorDatabase[11] = Vendor(11, "Jarson", itemDatabase[11]); //he sells all sorts of items at the general goods store
-	vendorDatabase[12] = Vendor(12, "Polly", itemDatabase[12]); //if you need a drink after a long day, she's your gal.
 
-	// Dellhollow
 	vendorDatabase[20] = Vendor(20, "Phil", itemDatabase[20]); //Phil will be a banana vendor in Dellhollow.
 	vendorDatabase[21] = Vendor(21, "Morrissey", itemDatabase[21]); //Morrissey will be black market dealer in Dellhollow available to rogues.
-
-// SAVED VARIABLES
-	Player player;
-	player.id = 0;
-	for (int i = 0; i < 5; i++) {
-		player.inventory[i] = itemDatabase[0];
-	}
-	
-
-	int mayoralMishapsOutcome = 0;
-	int sharkHunterOutcome = 0;
-	int milkManOutcome = 0;
 
 // GAMEPLAY LOOP
 	while (!quit) {
@@ -178,7 +139,6 @@ int main()
 
 			// Load a saved game.
 			case 2:
-				loadGame();
 				break;
 
 			// Instructions
@@ -246,50 +206,68 @@ int main()
 
 						// TEMP
 						cout << "Where do you want to go?" << endl;
-						string tBuildingOptions[5] = { "Town Hall", "Clack Clack Tavern", "Henry's Variety of Goods", "Save Game", " " };
-						activeBuilding = getInput(4, tBuildingOptions);
+						string tBuildingOptions[5] = { "Town Hall", "Clack Clack Tavern", "Henry's Variety of Goods", " ", " " };
+						activeBuilding = getInput(3, tBuildingOptions);
 					}
 
 					// Town Hall
 					if (activeBuilding == 1) {
 						system("CLS");
-						cout << "Sorry, town hall's closed!" << endl;
-						system("PAUSE");
-						activeBuilding = 0;
-						// First visit
-						if (visitedTownHall == 0) {
 
-							visitedTownHall = 1;
+						if (mayoralMishapsOutcome == 0) {
+							cout << "You arrive at town hall and you meet two arguing skeletons. They introduce themselves as" << endl;
+							cout << "P. Bone Simmons and G. Scapulas Murphy. They introduce themselves as the vilage's two mayoral candidates" << endl;
+							cout << "since the old mayor died 362 years ago. The death was very unexpected and there's never actually been" << endl;
+							cout << "an election before since the old mayor was actually a warlord." << endl;
+							cout << "You ask about your horse, and they tell you horses weren't invented until 361 years ago, so by the default" << endl;
+							cout << "of the old laws horses are contraband." << endl;
+							cout << endl;
+
+							string townHallOptions[5] = { "[Start Quest] Help them solve their problem." , "Leave.", " ", " ", " " };
+							int townHallChoice = getInput(2, townHallOptions);
+
+							if (townHallChoice == 1) {
+								activeBuilding = 0;
+								activeVillage = 0;
+								inQuest = 1;
+								activeQuest = 4;
+							}
+							else if (townHallChoice == 2) {
+								activeBuilding = 0;
+							}
 						}
-
-						// Rejected quest, visiting again
-						else if (visitedTownHall == 1 && mayoralMishapsOutcome == 0) {
-
-						}
-
-						// Visiting after quest complete
-						else {
-
+						else if (mayoralMishapsOutcome > 0) {
+							cout << "\"Thanks for your help!\" says the mayor." << endl;
+							system("PAUSE");
+							activeBuilding = 0;
 						}
 					}
 
 					// Clack Clack Tavern
 					if (activeBuilding == 2) {
 						system("CLS");
-						cout << "Sorry, tavern's closed!" << endl;
-						system("PAUSE");
-						activeBuilding = 0;
-						if (visitedClackClack == 0) {
+						
+						cout << "You enter the tavern. It's a rough and tumble place." << endl;
+						cout << "To your left, there's a couple skeletons brawling. One gets his head punched off, puts it back on, and punches off the other guys head." << endl;
+						cout << "They just keep doing that. Nobody seems to care. Maybe thev're been at it for a while." << endl;
+						cout << "To your right is a bard playing a lute. He's actually pretty good." << endl;
+						cout << "Ahead of you is a bartender. She has a hook hand and two eye patches." << endl;
+						cout << "On her tunic is a pin that says \"Don't ask\"." << endl;
+						cout << "You walk up to her and she asks you what you want." << endl;
+						cout << endl;
+						string clackClackOptions[5] = { "[Start Quest] A quest!", "To leave.", " ", " ", " " };
+						int clackClackChoice = getInput(2, clackClackOptions);
 
+						if (clackClackChoice == 1) {
+							activeBuilding = 0;
+							activeVillage = 0;
+							inQuest = 1;
+							activeQuest = 5;
 						}
-
-						else if (visitedClackClack == 1 && sharkHunterOutcome == 0) {
-
+						else if (clackClackChoice == 2) {
+							activeBuilding = 0;
 						}
-
-						else {
-
-						}
+					
 					}
 
 					// Henry's Variety
@@ -388,14 +366,6 @@ int main()
 							system("PAUSE");
 							activeBuilding = 0;
 						}
-					}
-
-					// Save Game
-					if (activeBuilding == 4) {
-						cout << "player: " << player.inventory[0].name << endl;
-						cout << "database: " << itemDatabase[0].name << endl;
-						system("PAUSE");
-						saveGame(player);
 					}
 
 				}
@@ -552,11 +522,6 @@ int main()
 				int receiptsFound = 0;
 				// Milk Man
 				while (activeQuest == 3) {
-					if (currScene == 24) {
-						cout << "This is the end of the demo! Thanks for playing!" << endl;
-						system("PAUSE");
-					}
-
 					ans = MilkMan[currScene].play(charHistMilkMan);
 					
 					// Start
@@ -579,7 +544,7 @@ int main()
 							break;
 						// Visit Rudolf
 						case 4:
-							charHistMilkMan[0] = receiptsFound;
+							charHistMilkMan[0] = bartReceipt;
 							currScene = 14;
 							break;
 						}
@@ -589,6 +554,10 @@ int main()
 						currScene = 0;
 					}
 				// BART PLOTLINE
+					// Got receipt 2/2
+					else if (rudolfReceipt == 1 && bartReceipt == 1) {
+						currScene = 24;
+					}
 					// Visit Bart
 					else if (currScene == 3) {
 						switch (ans) {
@@ -609,12 +578,13 @@ int main()
 						// [Charisma] Sweet talk bart
 						case 10: 
 							currScene = 11;
-							receiptsFound++;
+							fireworks = 1;
+							bartReceipt = 1;
 							break;
 						// Bard Rock bart
 						case 11: 
 							currScene = 12;
-							receiptsFound++;
+							bartReceipt = 1;
 							break;
 						}
 					}
@@ -634,17 +604,17 @@ int main()
 						// Stab
 						case 2:
 							currScene = 7;
-							receiptsFound++;
+							bartReceipt = 1;
 							break;
 						// Strength
 						case 10: 
 							currScene = 8;
-							receiptsFound++;
+							bartReceipt = 1;
 							break;
 						}
 					}
 					// Got reciept, go back to Henry
-					else if ((currScene == 7 || currScene == 8 || currScene == 10 || currScene == 11 || currScene == 12) && receiptsFound == 1) {
+					else if ((currScene == 7 || currScene == 8 || currScene == 10 || currScene == 11 || currScene == 12) && bartReceipt == 1 && rudolfReceipt == 0) {
 						currScene = 13;
 					}
 					else if (currScene == 9) {
@@ -654,13 +624,14 @@ int main()
 							break;
 						case 10:
 							currScene = 10;
-							receiptsFound++;
+							fireworks = 1;
+							bartReceipt = 1;
 							break;
 						}
 					}
 					// Only Barts receipt, talk to Henry.
 					else if (currScene == 13) {
-						charHistMilkMan[0] = receiptsFound;
+						charHistMilkMan[0] = bartReceipt;
 						currScene = 14;
 					}
 				// RUDOLF PLOTLINE
@@ -677,14 +648,15 @@ int main()
 							charHistMilkMan[0] = player.archetype;
 							currScene = 17;
 							break;
-						case 11:
+						case 10:
+							rudolfReceipt = 1;
 							currScene = 22;
 							break;
 						}
 					}
 					// Messed up
 					else if (currScene == 15 || currScene == 16 || currScene == 20) {
-						charHistMilkMan[0] = receiptsFound;
+						charHistMilkMan[0] = bartReceipt;
 						currScene = 14;
 					}
 					// Chimney
@@ -698,34 +670,231 @@ int main()
 							break;
 						case 10:
 							currScene = 21;
-							receiptsFound++;
+							rudolfReceipt = 1;
 							break;
 						}
 					}	
 					else if (currScene == 18) {
 						currScene = 19;
-						receiptsFound++;
+						rudolfReceipt = 1;
 					}
 					// Got receipt 1/2
-					else if ((currScene == 19 || currScene == 21 || currScene == 22 || currScene == 21) && receiptsFound == 1) {
+					else if ((currScene == 19 || currScene == 21 || currScene == 22 || currScene == 21)) {
 						currScene = 23;
-					}
-					// Got receipt 2/2
-					else if (receiptsFound == 2) {
-						currScene = 24;
 					}
 					else if (currScene == 23) {
 						charHistMilkMan[0] = player.stats[3]; // charisma
 						charHistMilkMan[1] = player.archetype; // class
 						currScene = 3;
 					}
-					else if (currScene == 24) {
-						cout << "Congrats on completing our demo!" << endl;
-						cout << "Please close the game or it will explode!" << endl;
-						system("PAUSE");
+					// Report back to henry
+					// THIS IS ON PURPOSE Fixes an annoying bug
+					if (currScene == 24) {
+						charHistMilkMan[0] = fireworks;
+						currScene = 25;
+					}
+				// RESCUE THE COW!!!
+					// First choice at mausoleum
+					else if (currScene == 25) {
+						switch (ans) {
+						case 1:
+							currScene = 26;
+							break;
+						case 2:
+							currScene = 31;
+							break;
+						case 10:
+							currScene = 32;
+							break;
+						}
+					} 
+					// Create a commotion
+					else if (currScene == 26) {
+						switch (ans) {
+						case 1:
+							currScene = 27;
+							break;
+						case 2:
+							currScene = 28;
+							break;
+						}
+					}
+					// Yell
+					else if (currScene == 27) {
+						switch (ans) {
+						case 1:
+							charHistMilkMan[0] = player.archetype;
+							charHistMilkMan[1] = player.stats[2];
+							charHistMilkMan[3] = bigRock;
+							break;
+						case 2:
+							currScene = 30;
+							break;
+						}
+					}
+					// Bang on door
+					else if (currScene == 28) {
+						currScene = 25;
+					}
+					// Headed into mausoleum, fight/talk
+					else if (currScene == 29) {
+						switch (ans) {
+						case 1:
+							currScene = 33;
+							break;
+						case 2:
+							currScene = 34;
+							break;
+						case 10:
+							currScene = 35;
+							break;
+						case 11:
+							currScene = 36;
+							break;
+						case 12:
+							currScene = 37;
+							break;
+						}
+					}
+					// Keep being insane
+					else if (currScene == 30) {
+						bigRock = 1;
+						currScene = 29;
+					}
+					// Fail to break in
+					else if (currScene == 31) {
+						currScene = 25;
+					}
+					// Blow it up!
+					else if (currScene == 32) {
+						currScene = 39;
+					}
+					// Fail at talking him down
+					else if (currScene == 33) {
+					currScene = 35;
+					}
+					// Beat him up
+					else if (currScene == 34) {
+						currScene = 38;
+					}
+					// Raise undead army, convince him this is dumb, hit him with big rock
+					else if (currScene == 35 || currScene == 36 || currScene == 37) {
+						currScene = 39;
+					}
+					// Reward for half a cow
+					else if (currScene == 38) {
+						milkManOutcome = 1;
+						kickingBoots = 1;
+						activeVillage = 2;
+						activeQuest = 0;
+						inQuest = false;
+					}
+					// Reward for full cow
+					else if (currScene == 38) {
+						milkManOutcome = 2;
+						kickingBoots = 1;
+						speedrunWand = 1;
+						activeVillage = 2;
+						activeQuest = 0;
+						inQuest = false;
 					}
 				}
 				
+
+				int charHistMayoralMishaps[5];
+				// Mayoral Mishaps
+				while (activeQuest == 4) {
+
+					charHistMayoralMishaps[0] = speedrunWand;
+					ans = MayoralMishaps[currScene].play(charHistMayoralMishaps);
+
+					if (currScene == 0) {
+						switch (ans) {
+						case 1:
+							currScene = 1;
+							break;
+						case 2:
+							currScene = 2;
+							break;
+						case 10:
+							currScene = 3;
+							break;
+						}
+					}
+					else if (currScene == 1 || currScene == 2) {
+						switch (ans) {
+						case 1:
+							currScene = 4;
+							break;
+						case 2:
+							currScene = 5;
+							break;
+						}
+					}
+					else if (currScene == 3 || currScene == 4 || currScene == 5) {
+						if (currScene == 3) {
+							poison = 1;
+						}
+						activeVillage = 2;
+						activeQuest = 0;
+						inQuest = false;
+						mayoralMishapsOutcome = 1;
+					}
+				}
+
+				int charHistSharkHunter[5];
+				// Shark Hunter
+				while (activeQuest == 5) {
+					charHistSharkHunter[0] = player.stats[2];
+					charHistSharkHunter[1] = poison;
+
+					ans = SharkHunter[currScene].play(charHistSharkHunter);
+
+					if (currScene == 0) {
+						switch (ans) {
+						case 1: 
+							currScene = 2;
+							break;
+						case 2:
+							currScene = 1;
+						}
+					}
+					else if (currScene == 1) {
+						currScene = 0;
+					}
+					else if (currScene == 2) {
+						switch (ans) {
+						case 1:
+							currScene = 3;
+							break;
+						case 2:
+							currScene = 4;
+							break;
+						case 3:
+							currScene = 5;
+							break;
+						}
+					}
+					else if (currScene == 4) {
+						currScene = 6;
+						
+					}
+					else if (currScene == 5 || currScene == 3) {
+						currScene = 7;
+					}
+					else if (currScene == 6) {
+						activeVillage = 2;
+						activeQuest = 0;
+						inQuest = false;
+						sharkHunterOutcome = 1;
+					}
+					else if (currScene == 7) {
+						activeVillage = 2;
+						activeQuest = 0;
+						inQuest = false;
+						sharkHunterOutcome = 2;
+					}
+				}
 			}
 		}
 
@@ -756,95 +925,4 @@ int getInput(int numOptions, string options[5]) {
 	}
 
 	return input;
-}
-
-void saveGame(Player player) {
-
-	//Open file
-	ofstream saveDataTxt("saveData.txt", ios::trunc); //opens file, makes one if the filename doesn't exist
-	//saveDataTxt.open("saveData.txt");
-
-	if (saveDataTxt.is_open()) {
-		//Name
-		saveDataTxt << "Name: " << player.name << "\n";
-
-		//Archetype
-		saveDataTxt << "Archetype ID: " << player.archetype << "\n";
-
-		//Stats
-		saveDataTxt << "Stats: ";
-		for (int i = 0; i < 5; i++)
-		{
-			saveDataTxt << player.stats[i];
-			saveDataTxt << " ";
-		}
-		saveDataTxt << "\n";
-
-		//Items
-		saveDataTxt << "Item IDs: ";
-		for (int i = 0; i < 5; i++)
-		{
-			saveDataTxt << player.getItemID(i);
-			saveDataTxt << " ";
-		}
-		saveDataTxt << "\n";
-
-		//Current Village
-
-
-		//Confirmation message
-		cout << "Game has been saved!" << endl;
-
-		//close file
-		saveDataTxt.close();
-
-		system("PAUSE");
-		system("CLS");
-	}
-	else {
-		cout << "Failed to open file!" << endl;
-	}
-
-}
-
-Player loadGame() {
-	Player newPlayer;
-	string line;
-	char statsToSave[5];
-	char startReadMarker = ':';
-	ifstream saveDataTxt("saveData.txt"); //opens file, makes one if the filename doesn't exist
-	//saveDataTxt.open("saveData.txt");
-
-	if (saveDataTxt.is_open()) {
-		while (getline(saveDataTxt, line)) {
-			for (int i = 0; i < line.size(); i++) {
-				if (line.at(i) == startReadMarker)
-				{
-					for (int j = i; j < line.size(); j++) {
-						int s = 0;
-						if (line.at(j) != ' ') {
-							statsToSave[s] = line.at(j);
-							s++;
-						}
-					}
-					
-				}
-				else {
-					//cout << " ";
-				}
-			}
-			//cout << "\n";
-			cout << statsToSave;
-		}
-	}
-	else {
-		cout << "Failed to load game!" << endl;
-	}
-
-	//close file
-	saveDataTxt.close();
-
-	system("PAUSE");
-	system("CLS");
-	return newPlayer;
 }
