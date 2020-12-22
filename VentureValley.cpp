@@ -519,8 +519,9 @@ int main()
 				}
 				
 				int charHistMilkMan[5];
+				int receiptsFound = 0;
 				// Milk Man
-				while (activeQuest == 3) {
+						while (activeQuest == 3) {
 					ans = MilkMan[currScene].play(charHistMilkMan);
 					
 					// Start
@@ -553,6 +554,10 @@ int main()
 						currScene = 0;
 					}
 				// BART PLOTLINE
+					// Got receipt 2/2
+					else if (rudolfReceipt == 1 && bartReceipt == 1) {
+						currScene = 24;
+					}
 					// Visit Bart
 					else if (currScene == 3) {
 						switch (ans) {
@@ -675,19 +680,16 @@ int main()
 					}
 					// Got receipt 1/2
 					else if ((currScene == 19 || currScene == 21 || currScene == 22 || currScene == 21)) {
-						if (rudolfReceipt == 1 && bartReceipt == 1) {
-							currScene = 24;
-						}
-						else {
-							currScene = 23;
-						}
+						currScene = 23;
 					}
 					else if (currScene == 23) {
 						charHistMilkMan[0] = player.stats[3]; // charisma
 						charHistMilkMan[1] = player.archetype; // class
 						currScene = 3;
 					}
-					else if (currScene == 24) {
+					// Report back to henry
+					// THIS IS ON PURPOSE Fixes an annoying bug
+					if (currScene == 24) {
 						charHistMilkMan[0] = fireworks;
 						currScene = 25;
 					}
